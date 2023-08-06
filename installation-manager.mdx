@@ -1,0 +1,61 @@
+---
+title: "Installation Manager"
+---
+
+As with everything in life, it's rare that one size fits all—and it's hard to expect your integrations to do the same. Fortunately, we've built our Installation Manager to solve this very problem. 
+
+Using Installation Manager, ISVs can craft one-off, user-specific configurations to easily adapt to individual user requests. 
+
+#### Real world example
+
+As an ISV, you've built and launched 5 integrations with SAP, NetSuite, Magento, Sage, and Salesforce CommerceCloud. Now, let's assume you have 100 customers using your Shopify integration to create new Purchase Orders. Of those 100 customers, you have an enterprise customer, ACMECo, (who is coincidentally your largest customer), requesting custom configurations. Seeing as this ACMECo is your single largest client, you're likely to want to support their requirements.
+
+To solve this, we've built Alloy's Installation Manager.
+
+### Building a User-specific Configuration
+
+Installation Manager makes it easy to make user-specific configurations. In this tutorial, we'll take a look at how to quickly modify a workflow and publish it to production in under 5 minutes.
+
+To make a user-specific configuration, navigate to the **Installations** tab and select the **Installation** you want to make a change for as seen below.
+
+> 👍
+> 
+> An "installation" is created each time a user installs an integration. For example, let's say you've built a Shopify Integration and have 100 users actively using it. This means you have 100 installations. Each installation has an associated user and workflows.
+
+![](/images/391a66c-Group_3.png) 
+
+Once you've selected the installation, you'll be taken to a detail page. This detail page will display all the relevant workflows associated with the installation you've selected.
+
+![](/images/2c228b3-Group_3_1.png) 
+
+To make a user-specific configuration, select a workflow. We'll choose the first one. You'll be taken into the workflow editor. From here, click the **Create a new user-specific version**button.
+
+![](/images/8e40f89-Screenshot_2023-07-17_at_9.46.29_PM.png) 
+
+> 📘
+> 
+> Behind the scenes, when you click the "Create a new user-specific version" button, Alloy's workflow engine creates a new version, or copy, of the workflow in question. This ensures that when you make changes, your user-specific edits won't affect other users.
+
+Once you've selected this button, you'll be taken into the workflow editor view. From here, you can make modifications to your workflows.
+
+As it stands right now, our workflow creates a new order in Shopify each time a Custom Event is invoked as seen below.
+
+![](/images/8ab9b72-installation-manager-old.png) 
+
+Let's say you want to adjust the workflow so that the order created contains a special tax rate for this user. To do this, we'll add a math block to calculate the tax rate of 5% of the total price.
+
+![](/images/93f134f-Group_5.png) 
+
+Next, edit the Shopify block to specify the tax price.
+
+![](/images/20c1e7c-Screenshot_2023-07-18_at_2.05.35_PM.png)
+
+And voilà! We're done. 
+
+When you're ready to go live, simply press the **Release user-specific version** and this workflow will automatically be updated for the specific installation you've selected. Note that other users will not be impacted by this one-off change.
+
+![](/images/ea9d1e8-Screenshot_2023-07-18_at_2.06.18_PM.png)
+
+> 📘
+> 
+> Assuming your workflow changes don't add any new blocks which might require the end user's configuration, changes you make will immediately go live upon releasing the new workflow version. If you made a change that is dependent on a user configuration (i.e. added a new block to the canvas that the user had not previously connected to), you'll need to use our SDK to prompt the user to reconnect.

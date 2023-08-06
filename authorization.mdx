@@ -1,0 +1,65 @@
+---
+title: "Backend Authorization"
+---
+
+### Get Your API Keys
+
+To make requests against the Alloy Embedded APIs, you’ll need to login to your Alloy Embedded account and located the **API Keys** tab under **Settings**. From here, you'll notice there are two types of API Keys to generate:
+
+- Development Key
+- Production Key
+
+![](/images/585ea94-Screen_Shot_2022-09-03_at_9.07.06_PM.png)
+
+The development and production keys are effectively identical with a minor caveat: Users created using the development key will be sandboxed to that environment. Because Embedded relies heavily on the concept of users, you can use your development key to generate as many test accounts as you like without congesting your production environment. When you're ready, you can easily swap keys to production.
+
+Note these keys are intended to be used on the backend only and should never be exposed to customers on the frontend.
+
+### Using Alloy Embedded API Keys
+
+To use our API key in your requests, include the key in the `Authentication` header as a bearer token. Other parameters can be added as specified in the API reference.
+
+```bash cURL
+curl <alloy-endpoint>
+   -H "Accept: application/json"
+   -H "Authorization: Bearer <API KEY>"
+```
+
+```node.js Node.js
+const request = require("request");
+
+request(
+  {
+    url: "<alloy-endpoint>",
+    headers: {
+      Authorization: "Bearer <API KEY>",
+    },
+  },
+  function (err, res) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(res.body);
+    }
+  }
+);
+```
+
+### Key Security
+
+You should always closely guard your production key. When you click the **Generate** button, the production API key will be shown once. You should make sure to securely store this key as it will not be shown again.
+
+If you click the Generate button again, Alloy Embedded will revoke the previous key and generate a new one.
+
+<Warning>
+  **Production Key Security**
+
+Production keys should be treated with the utmost care. If someone accidentally accesses your production key, they can make requests on behalf of your entire Embedded account. That's why we recommend **never** sharing this key with anyone else (or using it directly in the browser) and storing it in a secrets manager.
+
+</Warning>
+
+### Alloy IP Addresses
+
+Several apps, including many database blocks require you access them only via an IP Whitelist. If you are planning to [stream data](/docs/streaming-data-back-to-a-destination) to a data warehouse or database, you may need to whitelist our IP address.
+
+You can find our static IP address for the Alloy servers here: `3.211.13.53`

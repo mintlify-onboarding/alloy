@@ -1,0 +1,45 @@
+---
+title: "Handling Errors"
+---
+
+While we hope that your workflows never break, in practice every engineer knows things don’t always go as planned. Workflow errors can happen for a number of reasons including but not limited to:
+
+1. The merchant revoked the API connection
+2. The data field mapping was set up incorrectly
+3. The 3rd Party API is temporarily down
+
+For all of these reasons, it’s best to ensure you’re properly handling errors and have a system in place for when things go wrong. Alloy Embedded has a series of error handling mechanisms to make the tedious task of debugging a little less frustrating. Let’s take a look.
+
+### Streaming Errors back to your Application
+
+The easiest way to accurately handle errors within Alloy Embedded is to set up an endpoint where Alloy Embedded can send raw error data to. Similar to how we handle data streaming from a 3rd party app, by configuring this option in Embedded, we will send you realtime error statuses whenever a workflow fails.
+
+To enable this feature, navigate to the Settings page and enter your webhook URL. When you’re done, remember to hit the “Save” button.
+
+![](/images/a71c928-ss4.png)
+
+Now, whenever an error occurs, we’ll stream that error log data in real time to this endpoint. In order to identify which workflow the error came from, we’ll send you the following identifiers as headers:
+
+* `X-Alloy-WorkflowId`
+* `X-Alloy-UserId`
+* `X-Alloy-BlockName`
+* `X-Alloy-BlockType`
+* `X-Alloy-ExecutionUuid`
+
+You can read more about these headers [here](/docs/making-custom-api-calls#embedded-x-headers).
+
+### Using EventBridge to Stream Errors
+
+Alternatively if you're a heavy AWS user, you can also use Amazon EventBridge to stream error messages to your cloud configuration. We’ve built a native EventBridge configuration in our settings – to find this, navigate to the Alloy Embedded Settings page and enter your AWS configuration keys as seen in the screenshot below.
+
+![](/images/ced76ea-ss5.png)
+
+Note that the IAM user associated with these keys must have `AmazonEventBridgeFullAccess` access.
+
+![](/images/fa9d95f-Screen_Shot_2022-08-21_at_12.01.21_PM.png)
+
+Once you're finished, hit the "Connect" button to finalize your integration. And that's it! You're off to the races already.
+
+### Wrapping up
+
+In this tutorial, we looked at how to best handle errors in Alloy Embedded. Alloy Embedded offers a handful of ways to properly debug workflow errors including: (1) streaming error logs to your server and (2) using the Amazon EventBridge connection to route data to a cloud EventBus.

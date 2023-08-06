@@ -1,0 +1,100 @@
+---
+title: "NetSuite"
+description: "Learn how to set up and configure your NetSuite account with Alloy"
+---
+
+So you want to connect your NetSuite account to Alloy and start automating the most complex part of your tech stack? Well you've come to the right place.
+
+![](/images/f393a6c-Screenshot_2023-02-08_at_3.24.32_PM.png)
+
+To get started with our NetSuite integration, you'll need to enable what's called **Token-based Authentication** in NetSuite. Let's take a look at the steps to do so below.
+
+### Step 1: Create an App
+
+Login to your NetSuite account as the Admin user.
+
+Navigate to the **Setup** \> **Integration** \> **Manage Integrations** \> **New** section of your NetSuite account. 
+
+You should see a list of any integrations you've previously created (if any).
+
+![](/images/830909a-netsuite1.png)
+
+From here, you'll need to create the integration. Give the integration a **name**, set the **state** as **enabled** and select **"Token-Based Authentication"** as the **Authentication Sublist.**
+
+![](/images/6a81703-netsuite2.png)
+
+Once you've created the app, you'll get a **Consumer Key** and a **Consumer Secret.** Make sure to store these in a secure location as we'll be using these at the end of this tutorial.
+
+### **Step 2: Enable Web Services** 
+
+Next, you'll need to enable Token-based Authentication in your NetSuite account. To do so, navigate to **Setup** \> **Company** \> **Enable Features** \> **SuiteCloud** \> then scroll down until you see **SuiteTalk Web Services.**
+
+![](/images/ccfb996-netsuite3.png)
+
+From here, make sure you select SOAP and REST web services.
+
+![](/images/2afddf1-netsuite4.png)
+
+### (Optional Step) Step 3: Create a Token Role
+
+> 🚧
+> 
+> Optional Step
+> 
+> You ONLY need to do this if you would like to grant Alloy fine-grained access permissions. Note that if you do not supply all the required permissions Alloy may encounter issues. 
+> 
+> If you are unsure what this means, skip to the next section or contact your account rep.
+
+Now, you'll need to actually give your token permissions so that Alloy can use this token to automate things in your NetSuite account. Once more, navigate to **Setup** \> **Users/Roles** \> **Manage Roles**\> **New**
+
+From here, give your role a **name** and an **Id.**
+
+Then, navigate to **Sublist Permissions** \> **Setup** and select **Full** for the following permissions:
+
+* Log in using Access Tokens
+* Access Token Management
+* User Access Tokens
+* API Web Services
+* Add any other permissions you expect Alloy to integrate with (for example, if you want Alloy to modify your Purchase Orders, be sure to add that permission).
+
+Then, navigate to **Permissions Sublist** \> **Transactions** and add **Full** for **all permissions.** 
+
+![](/images/a11a51f-netsuite6.png)
+
+### Step 4: Create Access Tokens
+
+Lastly, navigate to **Setup** \> **Users/Roles** \> **Access Tokens** 
+
+![](/images/fb34254-netsuite7.png)
+
+ Click the **New Access Token** button as seen above. 
+
+Fill out the following fields
+
+* **Application Name:** Select the integration created Step #1
+* **User**: Select the "Alloy" employee we created in Step #4
+* **Role:** Select System Administrator (or a specific role if you created one in Step 3)
+
+![](/images/d80feca-netsuite8.png)
+
+You'll be presented with a Token Id and Secret.
+
+![](/images/77dc3af-netsuite9.png)
+
+### Step 5: Enable Token-Based Authentication
+
+Lastly, you'll need to enable Token-Based Authentication.
+
+Navigate to **Setup** and Under **Enable Features** make sure **Token-Based Authentication** is enabled as seen in the screenshot below. Be sure to save it once you've enabled it.
+
+![](/images/dd63e44-netsuite10.png)
+
+### Wrapping Up
+
+That's a wrap! You'll need these keys and the consumer secret and key from before. Use the keys you obtained from this tutorial when configuring NetSuite with Alloy.
+
+To get the `realm` you can locate the 6 digit number in the URL (it should prefix `app.netsuite.com`).
+
+Once you're ready, input the values in Alloy as seen below.
+
+![](/images/fdf728f-Screenshot_2023-02-08_at_3.26.01_PM.png)

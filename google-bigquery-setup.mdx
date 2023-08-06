@@ -1,0 +1,46 @@
+---
+title: "Google BigQuery"
+---
+
+In this article, you'll learn how to set up your Google BigQuery account to work with the Alloy platform. 
+
+To obtain credentials, you will need the following:
+
+* Project Id
+* Service Account Private Key JSON
+
+As you can see below, Alloy will need this information to make queries to your Big Query instance. You'll want to copy/paste that information in Alloy once you have it. In this guide, we'll explore how to obtain these keys.
+
+![](/images/581e4d4-Screen_Shot_2022-08-01_at_4.14.25_PM.png)
+
+### How to get the Project Id
+
+To obtain your project Id, navigate to your Google Cloud console's Projects List. You can do so [here](https://console.cloud.google.com/cloud-resource-manager?pli=1). Then, choose the Project ID of the project where your BigQuery is in.
+
+![](/images/1925313-Screen_Shot_2022-08-01_at_4.17.17_PM.png)
+
+### How to get the Service Account Private Key JSON
+
+First things first, if you don’t have a service account yet, create a service account following Google’s Documentation [here](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating).
+
+Then follow the steps in Google’s Documentation [here](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating) on how to create a private key in JSON format. See sample below showing how a private key in JSON format looks like.
+
+![](/images/fc5b1c8-Screen_Shot_2022-08-01_at_4.20.04_PM.png)
+
+### Configuring the Service Account
+
+Next, you'll need to configure the Service Account. To do so, follow the simple steps below:
+
+1. Go to the [project principals list](https://console.cloud.google.com/iam-admin/iam/project) in your Google Cloud Console
+2. Click on +Add  
+![](/images/a20b2f1-Screen_Shot_2022-08-01_at_4.22.21_PM.png)
+3. In the **New Principals** field, enter the service account. The service account is the entire email address.
+4. In the **Role** field, search for the role **BigQuery User** and select that. Then click on the **Save** button.  
+![](/images/089e4cf-Screen_Shot_2022-08-01_at_4.23.19_PM.png)
+
+### Complete Block Credentials
+
+1. Input the **Project ID** for your project found in the previous steps.
+2. Then copy the whole contents in the JSON file created in the previous steps into the **Service Account Private Key JSON** field and then click on **Validate**.
+
+![](/images/8661583-Screen_Shot_2022-08-01_at_4.24.48_PM.png)

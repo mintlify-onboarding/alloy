@@ -1,0 +1,59 @@
+---
+title: "Webhooks + API Request Blocks"
+---
+
+### **Incoming API Requests**
+
+**Making requests to Alloy**  
+To make requests to Alloy, use our Webhooks block. Once you define a workflow, you can set up a webhook as a trigger to send incoming data to the workflow
+
+![](/images/655ff3a-15156b7-w1.png)
+
+You’ll be prompted to select a form of authentication: Alloy supports API Key authentication and you also have the option to have no authentication. 
+
+Note: For security reasons, you should have some form of authentication if you’re planning on accessing sensitive information in your workflow. 
+
+For the purposes of our tutorial, we’ll select **Unauthenticated.** 
+
+![](/images/fc78172-w2.png "w2.png")
+
+Next, you’ll want to define the HTTP method. Alloy supports both GET and POST requests. Lastly, select the Response Model which is typically “On received”.
+
+If you want to send over custom data to Alloy, chances are you’ll want to send over **body** data which can subsequently be passed over to other parts of the workflow. Similar to how response data from other triggers (think the Shopify trigger) works, you can use any parameters you define in the webhook in future blocks in the workflow as variables.
+
+Let’s create a parameter called **name** and give it a sample value of **Gregg** as seen below
+
+![](/images/9a632cf-w3.png "w3.png")
+
+With that, you’ve successfully configured your webhook. You’ll be prompted with a URL below to make requests to and from your webhook.
+
+With your webhook trigger configured, you can make POST requests to it.
+
+![](/images/397f4a9-w4.png "w4.png")
+
+You can use an API tool like Postman to send outgoing data as seen below.
+
+![](/images/7be8acb-w5.png "w5.png")
+
+### Outgoing API Requests
+
+**Making requests from Alloy to an external API**  
+So far, we’ve looked at how to make requests to Alloy for triggering a workflow using the customer webhook block. While this is oftentimes useful for sending data to Alloy, many times you’ll want to take specific actions outside of Alloy (aka send data from Alloy to an external API).
+
+Sending data from Alloy is a perfect solution for an API we don’t currently support. For example, let’s assume you have a custom form on your website that you want to update every time an Alloy workflow is submitted. Let’s take a look at an example below:
+
+To get started, we’ll need to use the **Custom API Call** block.
+
+![](/images/0a1a5e8-w6.png "w6.png")
+
+In the below example, you can customize the data sent to the Custom API Call block. For instance, you would put the API URL in the URL field.
+
+![](/images/1255d8a-w7.png "w7.png")
+
+Make sure to specify the authentication type if there is one.
+
+This block also supports all forms of API requests including DELETE, GET, PATCH, POST, PUT, etc as seen below. You can also build your request to include any header or body parameters.
+
+![](/images/e914e18-w8.png "w8.png")
+
+Finally, remember that you can use any variable data from previous blocks in this block as well. As usual, when you’re ready, hit the **Activate** button to turn on the workflow. And viola, you’re off to the races!

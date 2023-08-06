@@ -1,0 +1,22 @@
+---
+title: "Rate Limits"
+---
+
+By default, Alloy Unified API supports a rate limit of 150 requests minute per user.
+
+This rate limit is **substantially higher** than if you were to build a direct integration (for context, Shopify's REST API gives you [2 requests per minute](https://www.shopify.com/partners/blog/rate-limits)).
+
+| Plan       | Definition                               |
+| ---------- | ---------------------------------------- |
+| Basic      | 150 requests per minute per user         |
+| Enterprise | Up to 1,000 requests per minute per user |
+
+---
+
+#### How can Alloy UAPI offer such high rate limits?
+
+Alloy UAPI maintains a real time cache of user data each time a connection is made. When a user initially connects to UAPI, we perform a one time historical sync to bring in all relevant data. Afterwards, we register all relevant webhooks and spin up recurring polling jobs to bring in new data in real time. This technology ensures our cache is always up to date with your user's data. Because of this, we are able to offer blazing fast API calls that aren't limited by traditional rate limits.
+
+#### Can I increase this limit?
+
+If you're an enterprise customer, you can request to increase this rate limit to as high as 1,000 requests per minute per user. Contact your account rep for more information.

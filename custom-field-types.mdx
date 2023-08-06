@@ -1,0 +1,31 @@
+---
+title: "Custom Field Types"
+---
+
+As we [previously discussed](/docs/variable-selector), Alloy provides the variable selector to make data mappings easy. However, enterprise applications like NetSuite, SAP, Salesforce, Hubspot, etc oftentimes require greater customization. When building integrations, it's important to consider that some apps (such as the ones named above) allow for custom fields which in turn complicates data mappings. Let's take a look at what this means in a real world example:
+
+### Real World Example
+
+ACMECo, an ISV, wants to build an integration that creates new Sales Orders in NetSuite every time an event occurs in ACMECo's platform. ACMECo sets up a series of field mappings using Alloy's variable selector to map the various data points to NetSuite. 
+
+Unfortunately, ACMECo realizes a handful of their end users require a bit more of a high touch approach – they have custom fields configured on their SalesOrder schema in NetSuite. VendorInc, one of ACMECo's customers, has a property called `VI_ORDER_NAME` which they use as the primary key for each Sales Order's name.
+
+ACMECo needs to support VendorInc's custom properties in order to build a robust NetSuite integration.
+
+### Alloy's Custom Fields
+
+Custom fields is a feature offered by Alloy on select blocks such as NetSuite, Salesforce CRM, and Hubspot. In the example below, we've selected the "Create a new Sales Order" action. Nestled below the "optional fields" section, you'll find the **Custom Fields** option.
+
+![](/images/66f23c0-Custom_Fields.png) 
+
+When the an ISV selects the **Allow user to add their Custom Fields** checkbox, Alloy will allow the end user to input their own fields and perform any field mappings at their discretion.
+
+![](/images/0e839b4-Screenshot_2023-07-18_at_11.27.08_PM.png)
+
+When we release the workflow, the modal detects we've selected **Allow use to add their Custom Fields**. As you can see in the screenshot below, the **Add Custom Field** button is now present. The End User can press this button to enter their own key/value pairs for any custom fields that might exist on their Sales Order object in NetSuite.
+
+![](/images/d442c8f-custom_fields_modal.png)
+
+#### Wrapping Up
+
+As you can see, adding custom fields is easy with Alloy. This feature is available on select blocks including NetSuite, Salesforce CRM, and Hubspot with more coming soon!

@@ -1,0 +1,46 @@
+---
+title: "JSON Web Token"
+description: "Encode and Sign Data with JSON Web Tokens"
+---
+
+The JSON Web Token (JWT) block is designed for creating, signing, and encoding JWTs, which are compact, URL-safe means of representing claims to be transferred between two parties. JWTs are often used for authentication and authorization purposes.
+
+### Setting the Expires In Time
+
+Ensure that you set the "expires in" time to prevent potential issues. You can use values such as `60`, `"2 days"`, `"10h"`, or `"7d"`. Numeric values are treated as seconds. If you use a string, provide the time units (days, hours, etc.), otherwise, milliseconds are used by default (e.g., `"120"` is equal to `"120ms"`).
+
+### Using Saved Credentials
+
+The block requires a saved credential under Settings > Credentials. You can also create one in the editor when "Hide This Block From Users" is enabled. When "Hide This Block From Users" is disabled, which is the default setting, the block automatically retrieves the secret key from the saved credentials.
+
+![](/images/7e2cbd3-image.png)
+
+### Example
+
+![](/images/eab64f1-image.png)
+
+Input JSON:
+
+JSON
+
+`{
+  "sub": "1234567890",
+  "name": "John Doe",
+  "iat": 1516239022
+}
+`
+
+Secret key: `8JjwU6mGc5kD2aY9zZxfAQSX9Rt3B7jH`
+
+Expires in: `2d`
+
+Output:
+
+JSON
+
+`{
+  "data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXh0Ijoie1xuICBcInN1YlwiOiBcIjEyMzQ1Njc4OTBcIixcbiAgXCJuYW1lXCI6IFwiSm9obiBEb2VcIixcbiAgXCJpYXRcIjogMTUxNjIzOTAyMlxufSIsImlhdCI6MTY4MjcxMzIzMSwiZXhwIjoxNjgyODg2MDMxfQ.w2IRrTljnsgtFHKT6rXkZ4jrNKlMOsssQ1RatD4oXSA"
+}
+`
+
+The JSON Web Token block enables developers to securely create and encode JWTs using a secret key and an expiration time. JWTs facilitate the management of access to sensitive information and can be used for authentication and authorization in various applications.

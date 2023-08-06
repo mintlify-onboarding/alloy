@@ -1,0 +1,102 @@
+---
+title: "Format Data Block"
+description: "Common data transformation tools"
+---
+
+The Format Data Block allows you to convert and format various types of data, such as phone numbers, currencies, text to numbers, and list lengths. 
+
+### Format Data Block - Available Options
+
+1. **Phone Number**: Convert a phone number to a different format.
+2. **Currency**: Convert a currency to a different format.
+3. **Text to Number**: Convert a string to a number.
+4. **List Length**: Get the length of a list.
+
+#### 1\. Phone Number
+
+The Phone Number option enables you to convert a phone number from one format to another. First, use the data selector to choose a phone number field from the available data. The phone number must be in a format recognized by the block. Then, select the desired output format from the "To Format" dropdown.
+
+The available phone number formats are:
+
+1. **+CNNNNNNNNNN (E164)**: Example: +14445556666
+2. **+C-NNN-NNN-NNNN (RFC3966)**: Example: +1-444-555-6666
+3. **+C NNN-NNN-NNNN**: Example: +1 444-555-6666
+4. **(NNN) NNN-NNNN**: Example: (444) 555-6666
+5. **NNN.NNN.NNNN**: Example: 444.555.6666
+6. **(NNN) NNN-NNNN x NNNN**: Example: (444) 555-6666 x 1234
+
+Example input:
+
+JSON
+
+`{
+  "phone_number": "+14445556666"
+}
+`
+
+Example output:
+
+JSON
+
+`{
+  "formatted": "+1-444-555-6666"
+}
+`
+
+#### 2\. Currency
+
+The Currency option allows you to reformat a cost, total, tax, or any money-related number to a different currency. You can choose from the following currency locales, which apply appropriate formatting, such as the pound sign for British pounds or a comma instead of a period for pesos:
+
+1. English (United States): en\_US
+2. Spanish (United States): es\_US
+3. English (United Kingdom): en\_GB
+4. Chinese (Simplified): zh\_CN
+5. Spanish (Spain): es\_ES
+6. German (Germany): de\_DE
+7. French (France): fr\_FR
+8. Russian (Russia): ru\_RU
+
+You can also choose from various currency letter prefixes, but be careful not to mismatch them improperly. The list of currency letter prefixes is available [here](https://www.currency-iso.org/dam/downloads/lists/list%5Fone.xml).
+
+**Warning**: Mismatching currency locales and letter prefixes may result in incorrect formatting.
+
+Example input:
+
+JSON
+
+`{
+  "amount": 120.50,
+  "currency_code": "RUB"
+}
+`
+
+Example output:
+
+JSON
+
+`{
+  "formatted": "120,50 ₽"
+}
+`
+
+#### 3\. Text to Number
+
+Text to Number allows you to select a string containing a number and convert it to an integer. Use the data selector to choose a field containing a number in text format. The output will be an integer.
+
+Example output:
+
+`{
+  "formatted": 10001
+}
+`
+
+#### 4\. List Length
+
+List Length calculates the length of a list. Instead of using the "Value" field like most options, this option has a "List to count length" field. Use the data selector to choose an array from the available data.
+
+Example output:
+
+`{
+  "listLength": 4
+}
+`

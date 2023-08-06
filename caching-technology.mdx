@@ -1,0 +1,15 @@
+---
+title: "Syncing Data"
+---
+
+Alloy Unified API syncs data in two ways: Webhooks and Polling reconciliation.
+
+By default, Alloy Unified API subscribes to all relevant webhooks. For example, whenever an Order is updated, deleted, or created, the these events will be streamed in real time to our cache which provides a continuously up-to-date copy of the connector's data.
+
+#### Dropped Webhooks
+
+Unfortunately, webhooks aren't entirely 100% reliable. Webhooks drop. To remedy this, we've built in polling reconciliation to automatically query for dropped events.
+
+#### Frequency
+
+UAPI automatically kicks off an initial sync when an end user initially connects their app. Afterwards, we perform an hourly sync to reconcile data. Note that webhook subscriptions are handled in real time.

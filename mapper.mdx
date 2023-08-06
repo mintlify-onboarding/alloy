@@ -1,0 +1,49 @@
+---
+title: "Mapper"
+description: "Rename JSON keys to use later in the workflow"
+---
+
+The Mapper block is a powerful tool for renaming and mapping JSON keys within a JSON object, enabling seamless integration and data ingestion across different systems.
+
+#### Usage
+
+To use the Mapper block, follow these steps:
+
+1. Use the data selector to choose data elements to rename (JSON fields fields or variable names)
+2. Choose a Key/Variable to rename
+3. Add the new desired name
+
+For example, if you have a variable like `customerEmail` and need it to be `customer_email`, the Mapper block makes these minor changes with ease.
+
+#### Features
+
+* Rename keys within JSON objects and subobjects.
+
+**Note:** When working with arrays, the Mapper block currently only maps one of the fields from the index of the block selected. This may cause inconsistencies in the output. Ideally, the block should be able to map all of the same keys within an array for consistency.
+
+#### Example
+
+![](/images/f90e55f-Screenshot_2023-06-15_at_11.49.52_AM.png)
+
+Using the Mapper block with a sample JSON order, you can map the `first_name` and `last_name` keys to `customer_full_name`, and the resulting mapped JSON will have the updated field name.
+
+JSON
+
+`{
+  "contactEmail": "[[email protected]](/cdn-cgi/l/email-protection)",
+  "first_name": "John",
+  "last_name": "Doe"
+}
+`
+
+After using the Mapper block:
+
+JSON
+
+`{
+  "contact_email_address": "[[email protected]](/cdn-cgi/l/email-protection)",
+  "customer_full_name": "John Doe"
+}
+`
+
+![](/images/829b3fa-Screenshot_2023-06-15_at_11.51.08_AM.png)

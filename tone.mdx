@@ -1,0 +1,31 @@
+---
+title: "Tone"
+description: "Learn how to combine Tone's messaging capabilities with other apps to vastly improve your marketing, customer service, & more"
+---
+
+In this article, you'll learn how to set up your Tone account to work with the Alloy platform. Once you've connected Tone, you'll be able to sync data from Shopify, ShipBob, Gorgias, Omnisend, and other apps into Tone, and vice versa.
+
+### Example Use Cases
+
+Send a text to a subscribed customer if item is on sale
+
+1. Trigger emails or SMS messages based on a customer's review score
+2. Send shipping and order updates via SMS
+3. Send loyalty and referral links via SMS
+4. Sending back in stock notifications based on tags
+
+### Setup Instructions
+
+1. In Alloy, create a new workflow
+2. Select any app you'd like to trigger the workflow. If you're a Shopify user, you'll likely want to connect Shopify Trigger and select an action like Inventory Levels Updated
+![1434](/images/a344fd7-t1.png "t1.png") 
+1. After you choose a trigger for your workflow, you can select a next block to add to your workflow. Here, you may want to add some other functionality, such as retrieving the list of customers in Shopify and filtering out certain tagged ones. This way, you can send a specific list of customers a SMS notification through Tone.
+2. Select Tone Messaging to then send an SMS with customer text to these customers
+![2658](/images/13cd135-t2.png "t2.png") 
+1. Select the Send SMS action
+![804](/images/db48f48-t3.png "t3.png") 
+1. Add your account by clicking the button and adding your Tone credentials
+![800](/images/672c199-t4.png "t4.png") 
+1. Configure Tone with the dynamic phone number outputted by Shopify and custom text
+![2230](/images/9f3570d-t5.png "t5.png") 
+1. Once you activate the workflow you're all set! It will trigger every time the Shopify event occurs, or whichever event you selected as your trigger

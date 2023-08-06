@@ -1,0 +1,15 @@
+---
+title: "Variable Selector"
+---
+
+As we've seen throughout these articles, selecting data to "map" to a destination involves using our variable selector. The variable selector surfaces all values available in any given block and can be used to define exactly what data to send where. 
+
+You can select an individual value by selecting it. However, sometimes you'll want to do more than that. Let's assume you have a workflow that streams Shopify orders created to your Snowflake warehouse. In this example, you want to selectively stream parts of the orders created payload to Snowflake. In particular, you want to stream tax data.
+
+![](/images/32931b8-Screen_Shot_2022-10-03_at_9.55.13_PM.png)
+
+Notice that objects are represented in the variable selector with an arrow. You can either select the entire object by clicking it _or_ select values within the Tax Lines object by clicking the dropdown and then selecting the values you want.
+
+Further, you can even send the entire incoming Shopify payload by selecting the "Shopify Trigger" at the very top of the variable selector as seen below.
+
+![](/images/e7d3150-Screen_Shot_2022-10-03_at_9.59.01_PM.png)

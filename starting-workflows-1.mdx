@@ -1,0 +1,55 @@
+---
+title: "Starting Workflows"
+---
+
+Welcome - we’re going to cover a few categories of popular automations to get you started with Alloy! With these three sets of workflows, you’ll be able to set up automated order notifications, enrich your customer data, and streamline your ecommerce stack. Each category has varying levels of workflow complexity that you can progress through as you get more familiar with Alloy.
+
+### Order Notifications
+
+You know better than anyone that keeping up to date with store happenings is key to running your business. Alloy’s dynamic variables and conditional logic features let you set up powerful, rules-based notification systems that help you get updates on your store throughout the day.
+
+**1) Slack notification when an order is placed** 
+
+This first workflow is a great starting point not just because we love watching order notifications stream in, but also because it features dynamic variables. Alloy has a feature called dynamic variables that let you customize messages and insert all sorts of custom data into other apps. In this example, you can send order-specific and customer-specific Slack messages like: “Sara Du ([\[email protected\]](/cdn-cgi/l/email-protection#82f1e3f0e3c2f0f7ece3eeeeedfbace1edef)) has placed her 5th order (#1001) for Alloy Cold Brew! 🎉” instead of: “A new order has been placed.” The order number and name of the customer were dynamic variables.
+
+**2) Email the wholesale team when certain customers place orders** 
+
+The next step up involves using logic conditions, so that your automation takes actions only on certain orders. At Alloy Coffee House, we have a list of wholesalers who need orders fulfilled quickly. Using conditional logic in Alloy, we can check if orders are placed by said customers and notify our warehouse via email.
+
+**3) Send your 3PL a daily list of orders late on fulfillment** 
+
+Taking actions on orders one by one is effective when communicating internally, but constantly pinging your 3PL isn’t going to do you any good. Moreover, after-hours notifications are likely to get lost in the influx of tasks in the morning. Instead, you can use scheduled triggers to send notifications and take actions during the times it makes most sense to do so.
+
+### **Enrich Customer Data** 
+
+Moving customer data around your various apps is a notoriously difficult challenge. Customer data is specific to the app that collects it, contains conflicting information when not frequently updated, and can be intentionally difficult to change. 
+
+**1) Add tags to customer profiles in Mailchimp when they’re added in Shopify** 
+
+The Mailchimp-Shopify breakup story is a favorite when referencing portability between ecommerce apps. When a direct integration isn’t available, individual third-party apps attempt to provide a tailored solution to the specific use case. But, we’re all limited by the same public APIs. Alloy gives you the ability to choose how your apps interact and how data is moved from one to the other.
+
+**2) Subscriber a user in Postscript when they’re created in Omnisend** 
+
+Sometimes, it isn’t about the relationship between two apps, but the resource limitations of building integrations for all tools. Our friends at Postscript built this workflow to add Omnisend contacts to Postscript using a specific keyword, showing how data portability gives you the freedom to use the tools you want without sacrificing the quality of your operation.
+
+**3) Send your third-party data from Octane AI to Omnisend using custom attributes** 
+
+Other times, data might be formatted in a way that isn’t easily interpretable by other apps. For example, third-party data is inherently specific to the questions a store sets to find out information after a customer they’re willingly sharing. So while Omnisend might have a “Subscription” field to send Shopify subscription data over for, they won’t have “Favorite Coffee Blend” as an option for our customers. To solve this, we specify both the name and content of a third-party data variable that can be used by a store in Ominsend, like they would any other mail-merge variable.
+
+### **Streamline Your Ecommerce Stack** 
+
+If you’re an ecommerce operator without a full development team, it can be difficult to solve problems that don’t fit neatly into the offering of any ecommerce apps. You’ve probably had to set up apps for everything little thing, from order tagging, to low inventory notifications, to data exports, and everything in between.
+
+**1) Send a notification when inventory levels fall below a certain level.**
+
+There are a ton of different options when it comes to getting inventory notifications, but they pretty much all function the same. When it comes to your Stack, breaking down processes into their component parts can help you identify areas where automation can reduce your store’s reliance on external apps. Cut out your low inventory notification app by installing this recipe.
+
+**2) Export key Shopify order data to Google Sheets** 
+
+Exporting data from your ecommerce apps is generally an easy task, but getting data exported into Sheets in the way your store requires it can be daunting. Alloy can pull individual orders, but can also pull groups of orders and use iteration logic to move large amounts of information seamlessly.
+
+**3) Recover abandoned carts by sending customers and email with a discount code** 
+
+Abandoned cart recovery is something else that stores often rely on an additional app to take care of despite the list being easy and simple to access. Using a combination of iteration and conditional logic, you can set up workflows to send personalized emails to customers reminding them about the products in their cart and incentivizing a purchase through a discount code.
+
+Hopefully you found this to be a good primer for learning about Alloy’s core principles: Dynamic variables, conditional logic, and iteration. This puts you well on your way to exploring how automation can save you time. But, even with all of these workflows in place, you’re just starting to scratch the surface of what Alloy can do. If you’re interested in finding out more, check out what other merchants and app partners are working on by exploring the Marketplace for prebuilt recipes or booking a demo with our success team. Next Workflows

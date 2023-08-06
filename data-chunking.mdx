@@ -1,0 +1,17 @@
+---
+title: "Data Chunking"
+---
+
+In the previous article, we covered [streaming data to a destination](/docs/streaming-data-back-to-a-destination) with Alloy's Stream Data block. Now, let's take things a bit further.
+
+By default, the Stream Data block will stream one item at a time to the webhook URL you've specified. Unfortunately, that can be pretty annoying sometimes if you're iterating through a list of hundreds, if not _thousands_ of items. Fortunately, we've got you covered.
+
+To remedy this, we've introduced a feature called "chunking." When enabled, our system automatically breaks an array down into groups, or chunks, of the size you've specified. Then, we only stream the chunk over to your API instead of sending hundreds of items at once.
+
+![](/images/5957bed-Screenshot_2023-07-15_at_10.05.19_PM.png) 
+
+Let's take an example:
+
+Say you're looking to retrieve all orders from a Shopify store. The store in question has over 10,000 orders. Rather than streaming each order over individually (and potentially overloading your own server's rate limits), you can tell Alloy to send over a specific chunk size. If you specify 50 as the chunk size, Alloy will send over 200 batches, or chunks, of 50 items.
+
+Enabling this feature is simple. Simply click the "Optional Parameters" dropdown inside the Stream Data block to select the chunk size. That's it! Easy peasy.

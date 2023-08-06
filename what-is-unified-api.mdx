@@ -1,0 +1,19 @@
+---
+title: "What is Unified API?"
+---
+
+So, you've landed here and are trying to figure out what a Unified API is, are you? Well fortunately you've stumbled onto the right place.
+
+A Unified API (also known as a UAPI for short) is a single API that acts as a master API of sorts. UAPIs connect multiple different connectors (also known as apps) together under a common schema. Why would you want this? Let's take an example:
+
+As an engineer, you might need to build out multiple commerce integrations. In today's world, there are dozens of apps you'd need to support – Shopify, BigCommerce, WooCommerce, Magento, Amazon, Wix, SquareSpace, etc – to name a few.
+
+Building each and every one of these integrations is time consuming and tedious. Fortunately, with Alloy's Unified API, we map all these APIs to a common model so you can easily prototype and launch integrations at scale with ease.
+
+![](/images/6109c29-Embeddded_IpaaS.jpg)
+
+The graphic above shows how this is done. In this example, we'll take a look at how Alloy maps **Order Data** across multiple connectors and standardizes it.
+
+As you can see, Alloy's Unified API maps all fields to a common model and performs a regular sync to ensure our cache maintains the structured data in sync with the 3rd party connector at all times. When you (as the ISV) hit our Unified API, you're really hitting Alloy's cache which maintains a realtime database of all the orders. This means we can bypass common rate limits imposed by apps like Shopify or Magento. More importantly, whenever a new event occurs in a 3rd party connector, Alloy Unified API subscribes to all the relevant webhooks behind the scenes to ensure our cache is constantly up to date. We even perform hourly reconciliation via polling to track dropped webhooks.
+
+This ensures you can count on Alloy Unified API to help you build reliable, scalable, and repeatable integrations.

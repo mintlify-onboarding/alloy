@@ -1,0 +1,46 @@
+---
+title: "Streaming Data to a Destination"
+---
+
+A core component of building any integration is not only being able to make outgoing actions from your platform to the 3rd party app but also being able to subscribe to webhook events (i.e. have data streamed from a 3rd party app to your platform) – we call this streaming data to a destination. Let’s take an example:
+
+Assume you’re building a Shopify integration. This integration comprises two parts:
+
+1. You want to be able to push data to Shopify (eg create a new order in Shopify with data from your platform)
+2. You want to be able to receive updates from Shopify in real time (eg realtime notifications when orders are updated in Shopify)
+
+Fortunately, Embedded has you covered. To create an event subscription (which is the term we’ll use to refer to anytime a 3rd party app sends you data through Embedded), you can add a “Trigger Block” to your workflow.
+
+![](/images/49bc957-stream-data-shopify-select-event-alloy.png)
+
+**Note**: Alloy Embedded supports two types of triggers: (1) realtime webhooks and (2) polling triggers. With realtime webhooks, Alloy Embedded subscribes to whichever topics you designate and then spins up the appropriate subscriptions on the backend. Our system then proxies the data to you once the event has been received. On the other hand, not every app has webhook support (popular examples of this include Magneto, Netsuite, etc). To get around this, we’ve set up polling triggers which effectively configure recurring jobs that run on our infrastructure to periodically ping the 3rd party app and check if anything has been updated or created. It’s important to note that polling triggers aren’t quite as realtime as webhooks but work just as good.
+
+### Streaming Data to your Application
+
+Now that you’ve selected the trigger block (in our example it's Shopify) and set up the topic you want to subscribe to, you just need to select the destination. A popular option is to set up a public facing POST endpoint on your server that Alloy Embedded can stream data to. If you choose this option, located the **Data Stream** block in the utilities section. You should see an input field to enter your webhook URL as seen in the screenshot below.
+
+![](/images/78091c0-stream-data-shopify-alloy.png)
+
+In the “data streaming” field, select the trigger block (in our example this is the Shopify Trigger) that you wish to stream data from. Then, enter the URL of the endpoint on your server you want Alloy Embedded to proxy the data to. This endpoint must be a POST endpoint otherwise the body data Alloy Embedded will send won't be reflected on your server.
+
+**Note**: Alloy Embedded will send an `X-Alloy-Signature` header with every request which you can use to verify this payload is coming from us.
+
+Once you’re done, turn on the workflow by activating it and give it a go! Each time the event subscription is invoked, we’ll send you the raw data we received from the 3rd party app.
+
+### Streaming Data to a Warehouse or other 3rd Party
+
+If you don’t want to set up a webhook or need to stream data to another platform, you can use Alloy Embedded to do this too. Let’s take an example. Assume you want to send Shopify Order updates to your data warehouse, in this example, BigQuery.
+
+There are a variety of reasons why this might be useful. Alloy Embedded is equipped to handle large sums of data with ease and efficency. To set up this flow, you’ll add a BigQuery block onto the workflow canvas after the Shopify Trigger as seen below.
+
+![](/images/ec06062-ss3.png)
+
+Then, configure BigQuery to stream the “Entire Block output” as seen in the screenshot. You’ll likely want to select the “Hide block to merchant” checkbox which will hide this block from the end merchant and will use the credentials you specified to stream the execution data to your BigQuery warehouse.
+
+![](/images/4fc894b-Screen_Shot_2022-08-21_at_11.54.25_AM.png)
+
+Voilà! Just like that, we've set up a data stream from Shopify to Big Query.
+
+### Wrapping up
+
+In this tutorial, we looked at how to sync data from an event subscription to a destination. As we've seen, destinations can be either your own server or a 3rd party application such as a data warehouse. Alloy Embedded sports dozens of possible destination options including: data warehouses (Big Query, Snowflake, Redshift, etc), databases (MySQL, MongoDB, MariaDB, etc) and other ingest methods (Google Pub/Sub, AWS S3, etc).

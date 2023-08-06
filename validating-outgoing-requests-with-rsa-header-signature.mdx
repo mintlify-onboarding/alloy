@@ -1,0 +1,28 @@
+---
+title: "Validating Outgoing Requests with RSA Header Signature"
+---
+
+In order to validate outgoing API requests are from Alloy (and not some malicious hacker), we’ve implemented an RSA Signature which we send in every outgoing API call from our Custom API block and our data streaming feature. You can learn more about these features [here](/docs/streaming-data-back-to-a-destination).
+
+This signature is signed with our **public key** which you can validate: [here](https://cdn.runalloy.com/security/alloy%5Fpublic%5Fkey.pem). This way, you’ll always know requests coming from Alloy are trusted and legitimate. Let’s take a look at how this works.
+
+Every request from our Custom API block and data streaming feature include a header called the `X-Alloy-Signature `. This header can be reconstructed and verified by making a SHA256 hash against the public key and a concatenated string containing the outgoing request data.
+
+We’ve built an example validation code snippet in node.js below. This snippet will generate a signature that should be identical to the value of X-Alloy-Signature. If this value matches X-Alloy-Signature, you should feel confident that the request is indeed coming from Alloy and is a trusted request, if the value you generated does not match the signature value in our header, then this should be considered a malicious request.
+
+TypeScript
+
+`` const publicKey = `https://cdn.runalloy.com/security/alloy_public_key.pem`;
+const signature = Buffer.from(request.headers['X-Alloy-Signature'], 'hex');
+const body = JSON.stringify(request.data || request.params);
+const url = request.url;
+const method = request.method;
+const stringToVerify = `${method}${url}${body}`;
+
+const isVerified = crypto.verify(
+  'sha256',
+  Buffer.from(stringToVerify), 
+  publicKey,
+  signature
+);
+ ``

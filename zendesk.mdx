@@ -1,0 +1,62 @@
+---
+title: "Zendesk"
+description: "How To Authenticate Your Zendesk Account and Setup Your Webhooks and Triggers"
+---
+
+In our example, we will be demonstrating how to set up a workflow that will send your team a Slack message when a customer writes into Zendesk to cancel their subscription.
+
+![](/images/fd0c191-image.png)
+
+Let’s dive right in shall we!
+
+**Authenticating Your Zendesk Account**
+
+Lets first start by authenticating our Zendesk account. You can do this either in your Alloy dashboard by going to **Settings -> Credentials -> New Credential** _OR_ by creating a new workflow and selecting Zendesk as the trigger. We will be doing the latter in this example.
+
+To properly authenticate your Zendesk account, you will need your Zendesk subdomain, email address and password. Be sure when entering your Zendesk subdomain that you only enter what comes before .zendesk.com/. 
+
+![](/images/82fb88c-Zendesk_Authentication.gif)
+
+_Tip: Your subdomain can be found in the address bar when logged into your Zendesk account._
+
+Now that your account is authenticated, let's configure your trigger in Alloy. This is where it gets a bit tricky but not to worry, we are here to help! For the purposes of our example, we will need to obtain the customer's email address and the ticket id so that you will know which ticket and profile to look at.
+
+![](/images/943e2fa-image.png)
+
+_Tip: Be sure to use correct formatting when adding the parameter values that you want pulled from Zendesk. Not sure what to type? Just add some dummy data and then come back and fix this later as it will make more sense after completing this tutorial._
+
+The last step here is to finish setting up your workflow so that we can activate it in order for the Zendesk trigger to register. We have added a Slack action block that will post a message into a channel containing the customers email address and ticket id when this workflow is activated.
+
+![](/images/50146fd-image.png)
+
+Now activate your workflow and we are on to the next step!
+
+**Setting Up Your Zendesk Trigger and Webhook**
+
+Now before we proceed, let's switch gears and hop into our Zendesk account for these next steps.
+
+**Zendesk Webhook:**
+
+To find your webhooks, in your Zendesk account, go to the **admin center -> apps and integrations -> webhooks**. In order to create a Zendesk webhook, all you will have to do is be sure you have activated your workflow inside of Alloy. Once you do this, the webhook will become available and active inside of your Zendesk account. 
+
+Tip: Be sure to edit the name of your webhook for easy finding in the next step.
+
+**Zendesk Trigger:**
+
+We must now create a new trigger. To do this, go to the **admin center -> objects and rules -> business rules -> triggers -> add trigger**. This is where you will set up the trigger criteria for the webhook that was created.
+
+To do this, we will need to take care of the following:
+
+Name - Name of the trigger  
+Description - What the trigger is meant to do  
+Category - We are using Notifications in this example  
+Conditions - These are conditions that must be met for the trigger to run. We will be adding a condition for when a customer writes in with the word cancel  
+Actions - what action the trigger is taking, what webhook it will be hitting and what the JSON body will look like.
+
+It is imperative to set up your JSON body just right, otherwise it will not work. The JSON body will match the parameter values on your Zendesk trigger inside of Alloy. You can simply copy and paste the JSON key value pairs into your Alloy workflow trigger if you put dummy data there earlier. 
+
+![](/images/6d458b2-image.png)
+
+_Tip: It is recommended to use the available placeholders to help you configure your JSON body._
+
+Click save and you are done! Time to take your newest workflow for a spin!

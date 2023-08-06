@@ -1,0 +1,21 @@
+---
+title: "What are Workflows?"
+---
+
+A workflow connects the software applications you use so that they can communicate and work in sync. For example, Shopify and Slack, 2 of Alloy's many integrations, could be connected through a workflow so that you can send all new Shopify order data to your Slack channel. 
+
+All workflows begin with what is called a trigger block. This means that an event in one of your apps will trigger your workflow. Continuing from our previous example, a new order in Shopify would be the “trigger” for your workflow, as that is the event that would kick off the action of sending that data to your Slack. 
+
+After the trigger block, workflows can have any number of additional action blocks that perform different actions, such as sending or retrieving data from other software apps. 
+
+There are two types of workflows in Alloy:
+
+* **Automatic:** Automatic workflows depend on an “on-off” switch that allows you to activate or deactivate them. Once activated, a workflow will run each time the trigger is set off. Any utility or app trigger besides the Manual Workflow trigger would result in an automatic workflow.
+* **Manual:** Unlike an automatic workflow, a manual workflow only runs when the user presses the “Run” button in order to trigger the workflow. Manual workflows can be beneficial for running workflows at your discretion as it requires user action for the workflow to be executed. Manual workflows require Manual Workflow as a trigger.
+
+To recap:
+
+| Automatic Workflow   | Manual Workflow                                                                                                          |                                                                           |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| How does it run?     | **Click "Activate" and "Deactivate" in the top right of the workflow editor or use the on-off switch in your dashboard** | **User must press the “Run” button in dashboard or workflow editor**      |
+| When is it deployed? | **Every time the specified event inside the trigger block occurs**                                                       | **The workflow will run once every time the user presses the run button** |

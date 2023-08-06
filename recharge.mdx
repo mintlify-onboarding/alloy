@@ -1,0 +1,28 @@
+---
+title: "ReCharge"
+description: "Learn how to combine ReCharge's subscriptions capabilities with apps like Yotpo, Gorgias, & more to vastly improve your customer experience."
+---
+
+In this article, you'll learn how to set up your ReCharge account to work with the Alloy platform. Once you've connected ReCharge, you'll be able to sync data from Tone, Gorgias, Omnisend, and other apps into ReCharge, and vice versa.
+
+### Example Use Cases
+
+1. Send text in campaign to activate a lapsed subscription “Text ACTIVATE to XXX”
+2. Give points and rewards to customers based on subscription duration
+3. Send text after ReCharge subscription cancellation
+4. Reward churned customers who return with X timeframe
+
+### Setup Instructions
+
+1. In Alloy, create a new workflow
+2. You could select ReCharge as the trigger (and any actions within ReCharge) or choose another app. First, authenticate with ReCharge
+![1664](/images/b5794a6-re1.png "re1.png") 
+
+Then select an action
+
+![1608](/images/47c7b1d-re2.png "re2.png") 
+1. You can then add other blocks to take actions depending on the event that occurs in ReCharge
+![2296](/images/d6f2012-re3.png "re3.png") 
+1. You can even add ReCharge again to perform another action. Let's say if subscription is cancelled in ReCharge, you can start an Omnisend reactivation campaign, and then wait 7 days before generating a ReCharge discount.
+![2772](/images/30be615-re4.png "re4.png") 
+1. Once you're finished, the activate button in the top right will turn blue and you can then activate the workflow so that anytime a ReCharge event occurs, your workflow can run!

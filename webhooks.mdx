@@ -1,0 +1,38 @@
+---
+title: "Webhooks"
+---
+
+Alloy Unified API also allows you to subscribe to realtime events via a webhook subscription. This allows you to stream realtime events to your webhook server.
+
+For apps that support webhooks directly (example: Shopify, BigCommerce), Alloy proxies those webhooks over to your webhook server in real time. However, not all apps support webhooks. To work around this, we set up automatic polling to periodically check if a record is updated or created. Example apps that use polling include Magento and NetSuite.
+
+#### Creating a Webhook Subscription
+
+To create a webhook subscription, you'll need to review the invoke the **[POST Create Subscription](/reference/create-subscription)** endpoint and pass along the `connectionId`, `address`, and `scope`. 
+
+For the e-commerce Unified API, you can subscribe to the following scopes:
+
+| Scope              | Definition                                    |
+| ------------------ | --------------------------------------------- |
+| commerce/customers | Alerts you whenever a new customer is created |
+| commerce/orders    | Alerts you whenever a new order is created    |
+| commerce/products  | Alerts you whenever a new product is created  |
+
+You can make a request as seen below. Be sure to supply a https secure destination where you want route the data to. Note that this endpoint must be a POST method.
+
+cURL
+
+`curl --request POST \
+     --url 'https://embedded.runalloy.com/2023-03/one/webhooks?connectionId=YOUR_CONNECTION_ID&' \
+     --header 'Authorization: Bearer YOUR_API_KEY' \
+     --header 'accept: application/json' \
+     --header 'content-type: application/json' \
+     --data '{
+         "address": "<YOUR_WEBHOOK_URL>",
+         "scope": "commerce/customers"
+     }'
+`
+
+Behind the scenes, we'll route any webhooks directly to this webhook server you've specified. Some apps, like Magento, don't support webhooks natively. When this occurs, we'll use polling to periodically check for new records and invoke the webhook accordingly. As you'd expect, we'll send you the unified model that corresponds to the `scope` you selected.
+
+You can delete a webhook subscription at any point by invoking the **[DELETE /webhooks/{subscriptionId}](/reference/delete-subscription)** endpoint.

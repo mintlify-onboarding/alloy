@@ -1,0 +1,40 @@
+---
+title: "Pagination & Filtering"
+---
+
+Alloy Unified API allows ISVs to quickly paginate through large data sets via our List APIs. To simplify this, at the end of every List endpoint, you'll find a `pageInfo` object as seen below:
+
+JSON
+
+`{
+  "pageInfo": {
+    "hasNext": false,
+    "nextCursor": "eyJpdGVtSWQiOnsiUyI6IjMwNDYwOTcxMjYSXzQifOwiZBF0YSJ1Y23ldCI6eyJTIjoiNjNjMTM5OWI3NzM5NmUwMjMzMDE3OTZjL2N1c3RvbWVyIn19"
+  }
+}
+`
+
+The `hasNext` key returns a boolean which identifies if another page exists or not.
+
+If `hasNext` is true, the `nextCursor` key will return a cursor to the next page. If `hasNext` is false, then `nextCursor` will return `null`.
+
+The cursor then can be to paginate through using the `cursor` query parameter.
+
+![](/images/b1386c1-Screenshot_2023-06-27_at_22.52.58.png)
+
+## Filtering
+
+You will naturally find yourself in need of filtering through your API calls which you can do on any of our endpoints. We have added filters to every resource to better speed up the process and eliminate any unnecessary and unneeded data in your response. Lets take a look at an example below.
+
+In this example we will be utilizing the \[[List Orders](/reference/list-orders)\] endpoint. Lets say you are looking to perform a GET request on the List Orders endpoint but you are only looking for orders that are both Fulfilled and exceeding a total of $250\. To do so, you would simply add those query params to your request which would look like the following:
+
+Text
+
+`https://embedded.runalloy.com/2023-03/one/commerce/orders?connectionId=<CONNECTION_ID>&fulfillmentStatus=Fulfilled&totalPriceMin=250
+`
+
+![](/images/aab5348-image.png)
+
+The choice of query params available can be found in the API reference of the corresponding resource endpoint. 
+
+It's that simple! Now combine this with the pagination ability described above and you are off to the races!

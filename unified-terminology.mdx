@@ -1,0 +1,13 @@
+---
+title: "Terminology"
+---
+
+Before you get too far ahead, take a minute to familiarize yourself with our terminology – we'll be referencing this often throughout these guides.
+
+| Term               | Definition                                                                                                                                                                                                                                                                                                                                   |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Connection         | A connection represents each time an end user links an app to Alloy's Unified API. For example, if your end user connects to NetSuite, that would count as a single connection.                                                                                                                                                              |
+| End User           | An end user, also known simply as a user, represents a tenant on your platform. For example, let's assume your customer, Bob, wants to connect to NetSuite. You'll need to create a user via our [POST Create User](/reference/create-a-user) endpoint before you can instantiate a connection to NetSuite.                                  |
+| Unified Schema     | Unified Schema refers to the single schemas we support across multiple apps. For example, Alloy's Unified API provides a Commerce Schema for Orders, Product, etc. Our schema maps various apps to the same common models behind the scenes so you can easily build and deploy multiple apps at scale.                                       |
+| Connector          | A connector, also known as an app or integration, represents the 3rd party application you want your end users to connect to. Common examples include Shopify, Magento, Salesforce Commerce Cloud, NetSuite, Sage, etc.                                                                                                                      |
+| Connector Category | A connector category refers to the type of connector you are looking to build. For example, Alloy Unified API supports a Commerce category and an ERP category (to name a few). Within each category, ISVs can build atop unified schemas for specific apps (i.e. Shopify, Magento, BigCommerce, etc all belong to the "Commerce" category). |

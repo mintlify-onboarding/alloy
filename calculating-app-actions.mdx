@@ -1,0 +1,15 @@
+---
+title: "Calculating App Actions"
+---
+
+An app action is counted every time a workflow moves data or takes action for you. You can think of it as every time an app is involved as well.
+
+![](/images/673ee73-c1.png "c1.png")
+
+For example, if you have a workflow that gets all of your store's orders (lets say you have 10 orders) and for each order you want to add some data to two different Google Sheets, this will count as 10 orders \* 2 actions each = 20 app actions.
+
+![](/images/8ef6ee1-c2.png "c2.png")
+
+Here's another example. Let's say you have a workflow like this: Trigger when order is paid -> Loop through each line item in the order -> For each line item \[add data to Google Sheet 1 -> add data to Google Sheet 2\] -> Send Slack -> Send Text. 
+
+If 5 orders come in, each with 2 line items, then this workflow runs 5 orders   _\[ (2 line items_  2 Google Sheet actions each) + 1 slack message + 1 text message\] = 30 app actions.

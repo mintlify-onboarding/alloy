@@ -1,0 +1,30 @@
+---
+title: "Custom Action"
+description: "Take your automation to the next level!"
+---
+
+The custom action feature is our way to guarantee that you are fully covered with every one of our 200+ integrations. Lets say there were additional endpoints added to an integrations api docs, with the Custom Action feature, you will be able to tap into that endpoint from day 1.
+
+Let's see how this can be accomplished!
+
+In our example Shopify has just added a new endpoint to their API docs for Holding an Order. It is handy to have the API documentation for the endpoint you will be using handy. Here is the Shopify one we are using if you would like to follow along.
+
+Let's go step-by-step:
+
+1. Select the Custom Action action in Shopify  
+![](/images/dd1282a-Screenshot_2023-06-26_at_10.51.56_PM.png)
+2. Next we will select our Request Method and add our URL. This is where the API docs come in handy. We will be using the POST method along with the endpoint highlighted in the screenshot below. We do not need to include anything prior to /fulfillment\_orders as that portion will already be included in any API call done from the block. The custom action feature uses the existing base URL and authentication mechanisms for the block you’ve chosen so you can save time when setting things up.  
+![](/images/27981ef-image.png)  
+We are not done quite yet. Keep in mind that the 1046000783 portion of the endpoint is a single Order Id. We will want to make this dynamic which we can do by using a dynamic variable from a previous block in our workflow.  
+Here is an example of our final outcome where you can see we are using a dynamic variable from the Shopify Order Created trigger block.  
+![](/images/cace767-image.png)
+3. Moving on to the Optional Parameters. We will select the following:  
+Body Content Type: JSON  
+Ignore Response Code: No  
+Body Source: Raw JSON String  
+Raw JSON Body: Body of the JSON payload  
+Here is a look at the final setup:  
+![](/images/10d834e-image.png)  
+You will notice we did not include any headers. This is because you have already authenticated your Shopify within Alloy so these will all be sent with every API call from this block just like with the beginning of the URL for each endpoint mentioned earlier.
+
+That’s it! You are now ready to tap into any new API starting on day 1! 🥳

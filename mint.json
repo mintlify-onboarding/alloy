@@ -1,0 +1,63 @@
+{
+  "name": "Alloy",
+  "logo": {
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#808080",
+    "light": "#929292",
+    "dark": "#808080"
+  },
+  "topbarCtaButton": {
+    "name": "Book a Demo",
+    "url": "https://runalloy.com/book-demo/"
+  },
+  "topbarLinks": [
+    {
+      "name": "Login",
+      "url": "https://app.runalloy.com/login"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Blog",
+      "icon": "magnifying-glass",
+      "url": "https://runalloy.com/blog/"
+    },
+    {
+      "name": "Guides",
+      "icon": "newspaper",
+      "url": "https://runalloy.com/guides/"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": ["introduction"]
+    },
+    {
+      "group": "Embedded ipaas",
+      "pages": [
+        {
+          "group": "Getting Started",
+          "pages": [
+            "terminology",
+            "embedded-quick-start",
+            "frontend-javascript-sdk",
+            "authorization",
+            "managing-users-and-logs",
+            "integrations",
+            "versioning-system"
+          ]
+        }
+      ]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "https://twitter.com/AlloyAutomation",
+    "linkedin": "https://www.linkedin.com/company/alloy-automation/",
+    "facebook": "https://www.facebook.com/AlloyAutomation"
+  }
+}

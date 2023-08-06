@@ -1,0 +1,450 @@
+---
+title: "Node.js SDK"
+---
+
+Our Node.js SDK allows you to easily setup, build, test, and go live with Alloy Embedded. Our SDK allows you to interface with our backend REST APIs in a quick and easy manner.
+
+In this guide, we'll take a look at how to use the Node.js SDK.
+
+---
+
+## Installation
+
+To install the Node SDK, run the following npm command.
+
+`npm install alloy-node --save`
+
+Once you have the SDK installed, import it into your file and authenticate it with your Embedded API key as seen in the code snippet below.
+
+JavaScriptTypeScript
+
+`const Alloy = require("alloy-node");
+const alloy = new Alloy("YOUR_API_KEY");
+`
+
+`import * as Alloy from 'alloy-node';
+const alloy = new Alloy('YOUR_API_KEY');
+`
+
+### Identifying Users
+
+Now that you have the SDK installed and have properly configured your API Key, let's take a look at the `alloy.identify()` method. The `identify` method is how you tell Alloy Embedded who the current user is. You should pass along the `userId` as the argument to this method.
+
+Let's take an example. Assume you want to list all workflows which your user has activated in his/her account. To do so, we'll first need to call `identify` first before making the call to list workflows. Your code snippet would look something like the following:
+
+JavaScript
+
+`await alloy.identify("userId");
+await alloy.getWorkflows();
+`
+
+Note that the userId is stored temporarily so as long as the library is instantiated. Therefore, you can make subsequent invocations without needing to invoke `identify` each time. To clear out the currently identified user, invoke the `clear` method as seen below.
+
+JavaScript
+
+`await alloy.identify("userId");
+await alloy.getWorkflows();
+await alloy.clear();
+`
+
+---
+
+## SDK Methods
+
+### User
+
+The User methods allow you to interact with user objects in Alloy Embedded. They correspond to their respective [REST APIs](/v2.0/reference/create-a-user).
+
+#### Create User
+
+Used to create a user object and returns a userId. Wrapper method for [this](/v2.0/reference/create-a-user) endpoint.
+
+JavaScript
+
+`await alloy.createUser({
+  username: "gregg",
+  fullName: "Gregg Mojica",
+});
+`
+
+---
+
+#### Batch Create Users
+
+Allows you to create multiple users at once. Wrapper method for [this](/v2.0/reference/batch-create-users) endpoint.
+
+JavaScript
+
+`const data = {
+  users: [
+    {
+      username: "user123",
+      fullName: "Joe Smoe",
+    },
+    {
+      username: "user456",
+    },
+    {
+      username: "janedoe",
+      fullName: "Jane Doe",
+    },
+    ...
+  ],
+};
+
+await alloy.batchCreateUser(data);
+`
+
+---
+
+#### List all Users
+
+Returns an array of all the currently created user objects in your Embedded account. Wrapper method for [this](/v2.0/reference/list-all-users) endpoint.
+
+JavaScript
+
+`await alloy.getUsers();
+`
+
+---
+
+#### Update User
+
+Allows you to update a user. You can pass either a `fullName` or a new `username` or both. Wrapper method for [this](/v2.0/reference/update-a-user) endpoint. You must `identify` the user prior to invoking this endpoint.
+
+JavaScript
+
+`await alloy.identify("gregg");
+await alloy.updateUser({
+  "fullName":"Joe Smoe",
+  "username": "joesmoe"
+ });
+`
+
+---
+
+#### Delete a User
+
+Used to delete a user. This action cannot be undone. Wrapper method for [this](/v2.0/reference/delete-a-user) endpoint. You must `identify` the user prior to invoking this endpoint.
+
+JavaScript
+
+`await alloy.identify("gregg");
+await alloy.deleteUser();
+`
+
+---
+
+### Apps
+
+The Apps method allows you to retrieve a list of currently supported apps in Alloy Embedded. Apps refer to the 3rd party connectors Alloy Embedded supports.
+
+#### List Apps
+
+Used to create a user object and returns a userId. Wrapper method for [this](/v2.0/reference/list-apps) endpoint.
+
+JavaScript
+
+`await alloy.identify("gregg");
+await alloy.getApps();
+`
+
+---
+
+### Integrations
+
+The Apps method allows you to retrieve an array of all enabled Integrations available to your users. You must `identify` the user prior to invoking this endpoint.
+
+#### List Integrations
+
+Used to create a user object and returns a userId. Wrapper method for [this](/v2.0/reference/list-integrations) endpoint.
+
+JavaScript
+
+`await alloy.identify("gregg");
+await alloy.getIntegrations();
+`
+
+### Frontend Authentication
+
+These methods are commonly used to render the workflows and generate the tokens needed to securely render the frontend Alloy Embedded modal.
+
+#### Get Workflows for a User
+
+Used to create a user object and returns a userId. Wrapper method for [this](/v2.0/reference/get-a-user) endpoint. 
+
+JavaScript
+
+`await alloy.getUser("gregg");
+`
+
+#### Get User Token
+
+Returns a JWT to securely render the Alloy Embedded modal. This token should be returned to the frontend and then passed into the frontend SDK. Wrapper method for [this](/v2.0/reference/generate-jwt-token) endpoint. You must `identify` the user prior to invoking this endpoint.
+
+JavaScript
+
+`await alloy.identify("gregg");
+await alloy.getUserToken();
+`
+
+---
+
+### Workflows
+
+These methods allow you to manage workflows.
+
+#### Get Workflows
+
+Lists all available workflows in Alloy Embedded. Note this endpoint does _not_ return a list of workflows that the user has installed, but rather a list of all _available_ workflows. Wrapper method for [this](/v2.0/reference/list-workflows) endpoint. You must `identify` the user prior to invoking this endpoint.
+
+JavaScript
+
+`await alloy.identify("gregg");
+await alloy.getWorkflows();
+`
+
+---
+
+#### Deactivate Workflows
+
+Deactivates all currently installed workflows for a user. Note this endpoint does _not_ return a list of workflows that the user has installed, but rather a list of all _available_ workflows. Wrapper method for [this](/v2.0/reference/disable-all-workflows-for-a-user) endpoint. You must `identify` the user prior to invoking this endpoint.
+
+JavaScript
+
+`await alloy.identify("gregg");
+await alloy.deactivateAllWorkflows();
+`
+
+---
+
+#### Deactivate a Workflow
+
+Deactivates a specific workflow for a user. This endpoint is commonly used to turn off a workflow for a user after the user has installed it via the Alloy Embedded modal. Wrapper method for [this](/v2.0/reference/deactivate-a-workflow) endpoint. You can deactivate a workflow by its name _or_ `workflowId`. See examples below. You must `identify` the user prior to invoking this endpoint.
+
+JavaScript
+
+`await alloy.identify("gregg");
+
+// Option #1
+await alloy.deactivate({ workflowName: "My Workflow"});
+
+// Option #2
+await alloy.deactivate({ workflowId: "workfowId"});
+`
+
+---
+
+#### Activate a Workflow
+
+Activates a specific workflow for a user. This endpoint is commonly used to reactivate a workflow after it has been deactivated (as seen above). Wrapper method for [this](/v2.0/reference/activate-a-workflow) endpoint. You can activate a workflow by its name _or_ `workflowId`. See examples below. You must `identify` the user prior to invoking this endpoint.
+
+JavaScript
+
+`await alloy.identify("gregg");
+
+// Option #1
+await alloy.activate({ workflowName: "My Workflow Name"});
+
+// Option #2
+await alloy.activate({ workflowId: "workfowId"});
+`
+
+---
+
+#### Run a Workflow
+
+Runs a specific workflow. 
+
+This method runs a workflow that uses a **Webhook Trigger**. Note that this method cannot be used to invoke a workflow that has a _Custom Event_.
+
+The method expects a `workflowName` _or_ `workflowId` as the first argument.
+
+If you have defined a custom JSON body for the Webhook Trigger, it should be passed as the second argument.
+
+ Wrapper method for [this](/v2.0/reference/run-workflow) endpoint. You must `identify` the user prior to invoking this endpoint.
+
+JavaScript
+
+`await alloy.identify("gregg");
+
+// Option #1
+await alloy.run("My Workflow Name", {
+  key1: "value1",  
+  key2: "value2",
+});
+
+// Option #2
+await alloy.run("My Workflow Id", {
+  key1: "value1",  
+  key2: "value2",
+});
+`
+
+---
+
+### Events
+
+These methods help you returns events and invoke them. For more on events, read this [tutorial](/v2.0/docs/integrations).
+
+#### Get Events
+
+Lists all available events and their associated schemas which you have defined in Alloy Embedded. Wrapper method for [this](/v2.0/reference/list-events) endpoint.
+
+JavaScript
+
+`await alloy.getEvents();
+`
+
+---
+
+#### Run Event
+
+Runs a specific event for the currently identified user. Once invoked, this will invoke any workflows which contain the specified event. 
+
+This method takes the name of the event as its first argument and the second argument should be the payload you intend to send to Alloy Embedded for this event. If no payload is required, you must send an empty array.
+
+Wrapper method for [this](/v2.0/reference/run-event) endpoint.
+
+JavaScript
+
+`// Reference
+await alloy.identify("gregg");
+await alloy.event("Event Name", payload);
+
+// Example Usage
+await alloy.event("Order created", { "orderId": YOUR_SERVICE.orderId; });
+
+// If no payload is needed
+await alloy.event("Order created", {});
+
+`
+
+---
+
+### Compliance
+
+This method allows you to delete workflow logs and any stored data for a user. Commonly used for GDPR and other privacy requests. For more on events, read this [section](/v2.0/docs/security-faqs).
+
+#### Delete User Logs
+
+Deletes all logs for an identified user. Wrapper method for [this](/v2.0/reference/delete-logs-for-a-user) endpoint. You must `identify` the user prior to invoking this endpoint.
+
+JavaScript
+
+`await alloy.identify("gregg");
+await alloy.deleteUserLogs();
+`
+
+---
+
+### Error Logging
+
+These methods are commonly used to debug workflows and their executions when things go wrong. For more on error handling, please read this [section](/v2.0/docs/handling-errors).
+
+#### Get Workflow Logs
+
+Returns all logs associated with a workflow including an `executionId` which can be used to rerun the workflow. Note that this method requires a `workflowId` of an active (child) workflow and _does not_ take a `workflowName`. Wrapper method for [this](/v2.0/reference/get-workflow-logs) endpoint. 
+
+JavaScript
+
+`await alloy.identify("gregg");
+await alloy.getWorkflowLogs("workflowId");
+`
+
+---
+
+#### Get Workflow Errors
+
+Returns all errors associated with a workflow and the associated timestamp when the workflow failed. Note that this method requires a `workflowId` of an active (child) workflow and _does not_ take a `workflowName`. Wrapper method for [this](/v2.0/reference/get-workflow-errors) endpoint. 
+
+JavaScript
+
+`await alloy.getWorkflowErrors("workflowId");
+`
+
+---
+
+#### Rerun Workflow Execution
+
+Reruns a workflow execution, typically used when the workflow failed and needs to be re invoked. Note that this method requires a `workflowId` of an active (child) workflow an executionId which can be returned from the `getWorkflowLogs` method. This method _does not_ accept a `workflowName`. Wrapper method for [this](/v2.0/reference/rerun-workfow) endpoint. 
+
+JavaScript
+
+`await alloy.rerun("workflowId", "executionId");
+`
+
+---
+
+### Credentials
+
+These methods allow you to manage credentials.
+
+#### Get Credential Metadata
+
+Returns the names of all the credentials for every app available in Alloy Embedded. Commonly used if you wanted to programmatically create a non-OAuth credential (i.e. for an app that uses API Key). Wrapper method for [this](/v2.0/reference/get-credential-metadata) endpoint. 
+
+JavaScript
+
+`await alloy.getCredentialMetadata();
+`
+
+---
+
+#### Create a Credential
+
+Allows you to programmatically create a credential. Commonly used if you wanted to programmatically create a non-OAuth credential (i.e. for an app that uses API Key). The schema for the second argument, the credential information is returned from the `getCredentials()` endpoint. Wrapper method for [this](/v2.0/reference/create-a-credential) endpoint. 
+
+JavaScript
+
+`await alloy.identify("gregg");
+await alloy.createCredential("NAME_OF_INTEGRATION", {
+  credField1: "key #1",
+  credField2: "key #2",
+});
+
+// Example
+await alloy.createCredential("klaviyoApi", {
+  apiKey: "xyz",
+  publicApiKey: "123",
+});
+`
+
+---
+
+#### List User's Credentials
+
+Returns a list of all previously credentials for a specified user. Wrapper method for [this](/v2.0/reference/list-user-credentials) endpoint. 
+
+JavaScript
+
+`await alloy.identify("gregg");
+await alloy.getCredentials();
+`
+
+---
+
+#### Delete a Credential
+
+Allows you to programmatically delete a credential for a specified user. Commonly used if you want to remove a credential from a user account. Note this action cannot be undone. Takes a `credentialId` as its argument. Wrapper method for [this](/v2.0/reference/delete-a-credential) endpoint. 
+
+JavaScript
+
+`await alloy.identify("gregg");
+await alloy.deleteCredential("credentialId");
+`
+
+---
+
+### Analytics
+
+These methods allow you to view analytics for a specified workflow.
+
+#### Get Credential Metadata
+
+Returns metrics data for a specified (child) workflow based on its Id. Takes a `workflow` as its argument. Wrapper method for [this](/v2.0/reference/get-workflow-analytics) endpoint. 
+
+JavaScript
+
+`await alloy.getAnalytics("workflowId");
+`

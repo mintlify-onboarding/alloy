@@ -1,0 +1,23 @@
+---
+title: "Handling Large Volume Workflows"
+---
+
+To help process workflows that have heavy loads, we've introduced a feature called "data sync". When you designate a workflow as a data sync workflow, we run it on a dedicated infrastructure designed to handle high volume as opposed to the standard Embedded queue. Note that you should be selective of which workflows you actually want to designate as data sync and not simply turn this feature on for everyone.
+
+> ❗
+> 
+> Only available as an add-on
+> 
+> This feature is only available as an add-on. If you are interested in learning more about it, please [contact us](/cdn-cgi/l/email-protection#55363a3b213436211527203b3439393a2c7b363a38).
+
+---
+
+### Real world example
+
+To better understand how the data sync feature works, let's take a real world scenario. Imagine you have two workflows: 1) Send order data to your server each time an order is placed in your Embedded merchant's stores and 2) When the user first signs up, obtain a historical list of all orders placed in their Shopify store (iterate through every order and send it to your server).
+
+In this scenario, we're assuming there are millions, if not billions, of orders in these stores and anticipate very high volume for the foreseeable future. As such, this is a good time to enable the data sync feature. To do so, you can navigate to the workflow settings icon and turn on the **data sync** toggle.
+
+![](/images/08960f0-image.png)
+
+Once you've done this, Alloy Embedded knows to process these workflows on a dedicated high-volume infrastructure.

@@ -1,0 +1,48 @@
+---
+title: "Google Cloud Storage"
+description: "Google Cloud Storage Credentials Setup Guide"
+---
+
+### Credentials
+
+For the credentials, you will need the following:
+
+1. The Project ID
+2. The Service Account Private Key JSON
+
+![](/images/2faaa00-image.png)
+
+---
+
+### How to get the Project ID
+
+1. Go to your Google Cloud Console's [projects list](https://console.cloud.google.com/cloud-resource-manager?pli=1).
+2. Choose the Project ID of the project where your Cloud Storage is in.
+
+![](/images/eac4add-image.png)
+
+---
+
+### How to get the Service Account Private Key JSON
+
+1. If you don’t have a service account yet, create a service account following [Google’s Documentation](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating).
+2. Then follow the steps in [Google’s Documentation](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating) on how to create a private key in JSON format. See sample below showing how a private key in JSON format looks like.
+
+![](/images/ac20027-image.png)
+
+---
+
+### Configuring the Service Account
+
+1. Go to the Cloud Storage in your Google Cloud Console
+2. Click on your desired Bucket
+3. Then click on Permissions and click on Grant Access
+4. Input the Service Account under New Principals
+5. In the **Role** field, search for the roles **Storage Legacy Bucket Owner** and **Storage Legacy Object Owner** and select that. Then click on the **Save** button.
+
+---
+
+### Complete Block Credentials
+
+1. Input the **Project ID** for your project found in the previous steps.
+2. Then copy the whole contents in the JSON file created in the previous steps into the **Service Account Private Key JSON** field and then click on **Validate**.

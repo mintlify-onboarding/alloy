@@ -1,0 +1,192 @@
+---
+title: "List Operation"
+description: "Effectively manage and process arrays with a range of list operation utilities."
+---
+
+The List Operation block provides a set of utilities for working with arrays. Each utility has different required inputs, depending on the chosen action. The following is a description of each action and their required inputs, along with sample JSON data:
+
+### Sample Input JSON
+
+The data below is provided as a sample input of an Order object containing a line\_items array which we will use in the following examples. 
+
+JSON
+
+`{"order_id":12345,"customer_id":67890,"status":"processing","created_at":"2023-05-01T12:00:00Z","updated_at":"2023-05-01T12:30:00Z","total_price":120.5,"subtotal_price":100,"taxes_total":20.5,"currency":"USD","discount_code":"SAVE10","discount_percentage":10,"shipping_address":{"first_name":"John","last_name":"Doe","address1":"123 Main St","address2":"Apt 4B","city":"New York","state":"NY","country":"USA","zip":"10001"},"billing_address":{"first_name":"John","last_name":"Doe","address1":"123 Main St","address2":"Apt 4B","city":"New York","state":"NY","country":"USA","zip":"10001"},"line_items":[{"product_id":11111,"product_name":"T-Shirt","quantity":2,"price":25},{"product_id":22222,"product_name":"Hoodie","quantity":1,"price":50},{"product_id":33333,"product_name":"Baseball Cap","quantity":2,"price":15},{"product_id":44444,"product_name":"Socks","quantity":2,"price":7.5}],"notes":"Please gift-wrap the items.","gift_wrapping":true,"requires_signature":false}
+`
+
+> 🚧
+> 
+> _To keep our UI running smoothly, we limit the amount of data displayed in lists. It may appear like you're missing data, but don't worry—your actual data processing won't be affected, and the full data will be available in subsequent blocks._
+
+### Group Items
+
+Group items in an array based on shared criteria or attributes.
+
+* **List To Process**: Select an array using the data selectors.
+* **Field Name**: Select a field from the keys of the objects inside the selected array. This field will be used as the basis for grouping the items.
+
+_Sample Output JSON (quantity):_
+
+JSON
+
+`{
+  "lists": [
+    {
+      "groupByValue": 1,
+      "list": [
+        {
+          "product_id": 22222,
+          "product_name": "Hoodie",
+          "quantity": 1,
+          "price": 50
+        }
+      ]
+    },
+    {
+      "groupByValue": 2,
+      "list": [
+        {
+          "product_id": 11111,
+          "product_name": "T-Shirt",
+          "quantity": 2,
+          "price": 25
+        },
+        {
+          "product_id": 33333,
+          "product_name": "Baseball Cap",
+          "quantity": 2,
+          "price": 15
+        },
+        {
+          "product_id": 44444,
+          "product_name": "Socks",
+          "quantity": 2,
+          "price": 7.5
+        }
+      ]
+    }
+  ]
+}
+`
+
+### Filter Items
+
+Filter the items in an array based on specific criteria, outputting a new array containing only the items that meet the given criteria.
+
+* **List To Process**: Select an array using the data selectors.
+* **Field Name**: Select a field from the keys of the objects inside the selected array. This field will be used to filter the items based on the comparison and value specified.
+* **Field Value Comparison**: Choose from Field is Greater Than, Less Than, Equal To, Contains, and Does not contain.
+* **Field Value**: Specify the value for the comparison selector. This value will be compared against the selected field of each object in the array to determine if it should be included in the filtered results.
+
+_Sample Output JSON quantity > 1:_
+
+JSON
+
+`{
+  "list": [
+    {
+      "product_id": 11111,
+      "product_name": "T-Shirt",
+      "quantity": 2,
+      "price": 25
+    },
+    {
+      "product_id": 33333,
+      "product_name": "Baseball Cap",
+      "quantity": 2,
+      "price": 15
+    },
+    {
+      "product_id": 44444,
+      "product_name": "Socks",
+      "quantity": 2,
+      "price": 7.5
+    }
+  ]
+}
+`
+
+### Map Items
+
+Create a new array containing only the values of a specified field for each item in the original array.
+
+* **List To Process**: Select an array using the data selectors.
+* **Field Name**: Select a field from the keys of the objects inside the selected array. This field's value will be extracted for each object and used to create a new array containing only these values.
+
+_Sample JSON:_
+
+JSON
+
+`{
+  "list": [
+    "T-Shirt",
+    "Hoodie",
+    "Baseball Cap",
+    "Socks"
+  ]
+}
+`
+
+### First Item
+
+Retrieve and output the first item in an array.
+
+* **List To Process**: Select an array using the data selectors.
+
+_Sample Output JSON (First Item):_
+
+JSON
+
+`{
+  "item": {
+    "product_id": 11111,
+    "product_name": "T-Shirt",
+    "quantity": 2,
+    "price": 25
+  }
+}
+`
+
+### Last Item
+
+Retrieve and output the last item in an array.
+
+* **List To Process**: Select an array using the data selectors.
+
+_Sample Output JSON (Last Item):_
+
+JSON
+
+`{
+  "item": {
+    "product_id": 44444,
+    "product_name": "Socks",
+    "quantity": 2,
+    "price": 7.5
+  }
+}
+`
+
+### Convert to Key-Value Pairs
+
+Convert a list of objects into key-value pairs.
+
+* **List To Process**: Select an array using the data selectors.
+* **Field Name**: Select a field from the keys of the objects inside the selected array. This field will become the new key in the key-value pairs.
+* **Field Value**: Select the value of the new key-value pair. This value will be extracted from each object in the array and paired with the selected field name as the key.
+
+_Sample Output JSON:_
+
+JSON
+
+`{
+  "map": {
+    "T-Shirt": 25,
+    "Hoodie": 50,
+    "Baseball Cap": 15,
+    "Socks": 7.5
+  }
+}
+`
+
+Use the provided sample data or your own data for testing.

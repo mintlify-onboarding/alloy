@@ -1,0 +1,33 @@
+---
+title: "Postscript"
+description: "Learn how to add Shopify customers as new Postscript subscribers"
+---
+
+In this article, you'll learn how to set up your Postscript account to work with the Alloy platform. Once you've connected Postscript, you'll be able to sync data from your Shopify, Klaviyo, and other apps into Postscript, and vice versa.
+
+### Example Use Cases
+
+Creating integrated email + SMS campaigns
+
+1. Managing SMS messages to subscription customers (i.e. syncing data with ReCharge)
+2. Tagging SMS subscribers and sending campaigns based on specific triggers
+3. Text a reward to churned ReCharge customers who return with X timeframe
+
+### Get Postscript credentials
+
+1. In your Postscript dashboard go to Settings > API
+2. Click on **Creating Security Key Pair**
+3. Click on **Private Key** and copy the whole string
+
+### Connect to Alloy
+
+1. In Alloy, create a new workflow
+2. Select Shopify Trigger, or any app you'd like to trigger the workflow. Set up the app.
+3. Choose Postscript as the second block in your workflow
+4. Choose any action, such as **Create Subscriber** with **Keyword**
+![2160](/images/e2ad0cd-p1.png "p1.png") 
+1. In the Step 2 Authenticate step, paste your Postscript Private Key into the field then press **Validate**
+![826](/images/a071bf0-p2.png "p2.png") 
+1. Proceed to the Step 3 Configure step and fill in the required fields. Note that if you use keywords, you'll need to go to Postscript and create a new keyword you want to use to track opt ins from this source
+![822](/images/a78a1fe-p3.png "p3.png") 
+1. Activate your workflow!

@@ -1,0 +1,27 @@
+---
+title: "Custom API Calls"
+---
+
+It's also quite common to want to send data to a third party API (perhaps even your own) at some point in a workflow execution. We've build a Custom API Block to handle just that. To add a Custom API Block, simple add it at any point in your workflow as seen below.
+
+![Custom API Block is found under Utilities](/images/ae618c4-Screen_Shot_2022-10-03_at_9.44.33_PM.png)
+
+Custom API Block is found under Utilities
+
+You can easily configure the Custom API block authentication (we support basic auth, header auth, and no auth), the request method (i.e. GET, POST, PUT, DELETE, etc), and any header or body parameters you want sent out. Of course, you can use any variable data exposed in previous blocks by using the variable selector.
+
+![Configure the Custom API Block method, authentication, etc](/images/35d498f-Screen_Shot_2022-10-03_at_9.46.02_PM.png)
+
+Configure the Custom API Block method, authentication, etc
+
+### Embedded X-Headers
+
+If you're sending data from an event (such as Shopify) your own API, we've found it useful to be able to identify which workflow and user the incoming request is coming from. To alleviate that problem, whenever an outgoing API call is sent via the Custom API Block, we attach the following headers:
+
+| Parameter             | Description                                                                                                         |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| X-Alloy-WorkflowId    | Represents the workflowId of the workflow where this request origionated from                                       |
+| X-Alloy-UserId        | Represents the current userId the workflow is being invoked for                                                     |
+| X-Alloy-BlockName     | Represents the starting event block that triggered the workflow                                                     |
+| X-Alloy-BlockType     | Represents the starting event block type (i.e. Shopify) that triggered the workflow                                 |
+| X-Alloy-ExecutionUuid | Represents the unique identifier for the current execution. Useful if you want to rerun an execution after the fact |

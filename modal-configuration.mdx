@@ -1,0 +1,27 @@
+---
+title: "Modal Configuration"
+---
+
+There are some instances where it makes sense to have additional configuration available in the Embedded Modal. In this tutorial, we'll take a look at some of the options available.
+
+### Hiding the Modal
+
+You may not always want to show the Embedded Modal _if_ your user has already pre-authenticated an app. Let's take an example: you've asked your customer to authenticate their Shopify account already and want to allow them to enable another workflow after the fact. However, you don't need to show the modal flow since they've already authenticated before – showing the modal again might confuse them.
+
+Fortunately, we've baked logic into the Embedded to make it easy to detect when conditions like this are met. The [Frontend SDK's](/docs/frontend-javascript-sdk) `install` method definition is defined below:
+
+JavaScript
+
+`Alloy.install({
+  integrationId: "633a39aaa0c6f21cbaf58df1",
+  callback: () => { console.log(); }
+});
+`
+
+If you pass the `alwaysShowAuthentication` argument as `true`, by default this will _always_ prompt a user for authentication regardless of if they have previously authenticated the app.
+
+You can also pass the `hide` argument and when set to `true`, this will hide the modal entirely if (and only when) two conditions are met: (1) the user must have previously authenticated the app and (2) the workflow/integration must not require any customization from the user.
+
+You can also pass the `title` argument which accepts a string. Providing this will prompt a custom title to render in the Embedded Modal.
+
+For more information, you can learn more about the Frontend SDK [here](/docs/frontend-javascript-sdk).

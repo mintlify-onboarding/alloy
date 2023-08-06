@@ -1,0 +1,55 @@
+---
+title: "Snowflake"
+---
+
+In this article, you'll learn how to set up your Snowflake account to work with the Alloy platform. 
+
+To obtain credentials, you will need the following:
+
+* Account Name
+* Database Name
+* Data Warehouse Name
+* Snowflake Username
+* Snowflake Password
+* Role
+
+As you can see below, Alloy will need this information to make queries to your Snowflake warehouse. You'll want to copy/paste that information in Alloy once you have it. In this guide, we'll explore how to obtain these keys.
+
+![](/images/07ab63b-Screen_Shot_2022-09-29_at_1.15.43_PM.png)
+
+### How to get the Account Name
+
+To obtain your account name, navigate to **Admin** on the sidebar then choose **Account**. There are two parts to your Account Name. Note down the top part and the bottom part.
+
+![](/images/2c34948-Screen_Shot_2022-09-29_at_1.17.59_PM.png)
+
+### How to get the Data Warehouse Name
+
+Go to Admin on the sidebar then choose Warehouses. Then, note down the Warehouse Name from the list
+
+![](/images/532dcf0-a.png)
+
+### How to get Database, Schema and Role
+
+Go to Data on the sidebar, select your desired database and schema. There you will find the database (1), schema (2) and role (3). The **role** will be the role of the user you want to use to access.
+
+![](/images/92b8e5e-Screen_Shot_2022-10-02_at_2.52.52_PM.png)
+
+### Complete Block Credentials
+
+Now that you have everything needed, return to Alloy.
+
+For the Account Name, input the first part followed by a hyphen and the second part. Input the Database, Schema and Role. Finally input the Username and Password of the user you want to use for the credentials.
+
+![](/images/42a63f5-alloy-creds.png)
+
+### (Optional) Adding Alloy’s IP Address
+
+If you have IP whitelisting on your Snowflake warehouse, you will need to whitelist Alloy servers to connect to Snowflake. To learn more about this, please read [this article](/docs/authorization#alloy-ip-addresses).
+
+1. To enable whitelisting, first go to Admin on the sidebar and click Security
+2. Click on the + Network Policy Button to add a network policy.
+3. Input the IP Address under the Allowed IP Addresses
+4. Then click on Create Network Policy on the pop-up to save.
+
+![](/images/cc97f11-ip-whitelist.png)

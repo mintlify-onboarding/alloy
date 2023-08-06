@@ -1,0 +1,164 @@
+---
+title: "Frontend JavaScript SDK"
+---
+
+<Warning>
+  If you are using the Embedded Modal, you **must** use our Frontend JavaScript
+  SDK. For other presentation options such as the Embedded Link or Headless, the
+  frontend JavaScript SDK is not required. You can read more
+  [here](/docs/presentation-options).
+</Warning>
+
+Our Frontend SDK makes it easy to get started with Alloy Embedded. The Frontend SDK is used to render the Alloy Embedded modal.
+
+## Installation
+
+To set up the Frontend SDK, install it with the script tag as seen below. This should be entered in the header of your site.
+
+```html HTML
+<script
+  src="https://cdn.runalloy.com/scripts/embedded.js"
+  type="text/javascript"
+></script>
+```
+
+When interacting with the Embedded Modal, you can access the Alloy library using the `window` object.
+
+### Rendering the Embedded Modal
+
+Now that you have the SDK installed the first thing you'll need to do in order to render the Embedded Modal is to set your JWT. As mentioned [here](/reference/generate-jwt-token), a JWT is required to securely authorize the user. Once you've made a request to the Embedded APIs to retrieve your short lived token, you can set the token in the frontend SDK using the `setToken` method.
+
+```java JavaScript
+Alloy.setToken("<YOUR_TOKEN>");
+```
+
+All frontend SDK methods require that you must first invoke `setToken`.
+
+Now that you've set the token, to render the Embedded Modal, call the `install` method. This method tells the frontend SDK to render the Embedded modal for the user specific to the JWT you generated.
+
+The `install` method takes various arguments, many of which are optional:
+
+| Parameter                | Type    | Description                                                                                                                                                                                                                                             |
+| ------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| integrationId            | String  | The Id of the integration you want to display. If this is selected, you do not need to pass the workflowIds argument                                                                                                                                    |
+| workflowIds              | Array   | An array of (strings) Ids for the workflows you want to display.                                                                                                                                                                                        |
+| callback                 | N/A     | A callback function invoked when the user has successfully installed their workflow from the Embedded Modal                                                                                                                                             |
+| alwaysShowAuthentication | boolean | This (optional) argument will always show the authentication step in the Embedded Modal when set to true. By default, the authentication screen is hidden if and when an Embedded Merchant has already authenticated the apps displayed on that screen. |
+| hide                     | boolean | This (optional) argument will hide the entire Embedded Modal if and when a user has has already authenticated the apps displayed needed to enable the workflow **and** the workflow does not require any configuration in the second step.              |
+| title                    | String  | This (optional) field will show a custom title in the Embedded Modal as specified.                                                                                                                                                                      |
+
+Below is an example of how you can render the Embedded Modal to bulk install all workflows in an integration:
+
+```java JavaScript
+Alloy.install({
+  integrationId: "633a39aaa0c6f21cbaf58df1",
+  callback: () => { console.log(); },
+  alwaysShowAuthentication: true,
+  hide: false,
+  title: "My Cool Shopify Integration"
+});
+```
+
+You can also prompt the user to install select workflows by their `workflowIds`.
+
+```java JavaScript
+Alloy.install({
+  workflowIds: ["633a3c6e7de884e8880bcfad", "633a3c7e95319a05f3b3ea2a"],
+  callback: () => { console.log(); },
+  alwaysShowAuthentication: true,
+  hide: false,  // optional
+  title: "Cool Alloy Workflows"
+});
+```
+
+### Updating a Workflow
+
+When a new workflow version is released that is newer than the currently installed version, you'll often want to prompt users to upgrade to the latest version.
+
+</Note>
+
+**Updating Workflows**
+
+You can tell when a workflow needs to be updated by comparing the payload returned from the [List Integrations](/reference/list-integrations) or [List Workflows](/reference/list-workflows) endpoints. When the `version` is greater than the `installedVersion` value, you should prompt the user to update their workflow.
+
+</Note>
+
+To update a workflow, invoke the `update` method. This method allows you to edit a workflow and accepts the same params as `install`. The edit method does not accept an `integrationId` and only works with `workflowIds`.
+
+```java JavaScript
+Alloy.update({
+  workflowIds: ["633a3c6e7de884e8880bcfad", "633a3c7e95319a05f3b3ea2a"],
+  callback: () => { console.log(); },
+  alwaysShowAuthentication: true,
+  hide: false,
+  title: "Cool Alloy Workflows"
+});
+```
+
+Note that the `update` method does not allow you to specify a version to update to. Instead, it defaults to whatever the most recently released version (as specified by the `version` key in the [List Workflows](/reference/list-workflows) endpoint).
+
+### Editing a Workflow
+
+You may want to allow a user to edit a workflow after they have installed it. For example, let’s say our merchant installed a workflow that sends them a message in Slack every time an event happens. This workflow requires them to customize the "channel" parameter of the Slack integration (i.e. the user needs to select the channel to send messages to in Slack).
+
+Now let's assume the user decides they want to change their selection after the fact. The `edit` method allows you to present the modal again so that they can do just that.
+
+```java JavaScript
+Alloy.edit({
+  workflowIds: ["633a3c6e7de884e8880bcfad", "633a3c7e95319a05f3b3ea2a"],
+  callback: () => { console.log(); },
+  alwaysShowAuthentication: true,
+  hide: false,
+  title: "Cool Alloy Workflows"
+});
+```
+
+The edit method does not accept an `integrationId` and only works with `workflowIds`.
+
+### List all Workflows
+
+You can list all workflows for a user by invoking the `getWorkflows` method as seen below.
+
+```java JavaScript
+Alloy.getWorkflows();
+```
+
+### List all Integrations
+
+You can list all integrations for a user by invoking the `getIntegrations` method as seen below.
+
+```java JavaScript
+Alloy.getIntegrations();
+```
+
+### Deactivate a Workflow
+
+You can deactivate a workflow by `workflowId` or `name` using the `deactivate` method as seen below.
+
+```java JavaScript
+Alloy.deactivate({
+  workflowId: "633a3c6e7de884e8880bcfad"
+});
+
+// OR
+
+Alloy.deactivate({
+  workflowName: "Shopify to Snowflake"
+});
+```
+
+### Activate a Workflow
+
+Similarly, you can activate (or reactivate) a workflow by its `workflowId` or `name` using the `deactivate` method as seen below.
+
+```java JavaScript
+Alloy.reactivate({
+  workflowId: "633a3c6e7de884e8880bcfad"
+});
+
+// OR
+
+Alloy.reactivate({
+  workflowName: "Shopify to Snowflake"
+});
+```

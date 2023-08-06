@@ -1,0 +1,60 @@
+---
+title: "ShipHero"
+description: "Learn how to authenticate and combine ShipHero's warehousing capabilities with other apps to improve your store's customer experience and logistics."
+---
+
+Learn how to authenticate and combine ShipHero's capabilities with other apps to vastly improve your logistics & ops workflows  
+In this article, you'll learn how to set up your ShipHero account to work with the Alloy platform. Once you've connected ShipHero, you'll be able to sync data from Shopify, PostScript, Gorgias, and other apps into ShipHero, and vice versa.
+
+### Example Use Cases
+
+Send delivery and warehousing updates via SMS to team or customers
+
+1. Tag orders based on delivery speed
+2. Auto-create shipping labels for return requests
+3. Send reorder alerts to staff for low inventory
+4. Sending back in stock notifications based on tags
+
+---
+
+### Authentication
+
+For the credentials, you will need the following:
+
+1. Access Token
+2. Refresh Token
+
+### How to get the Tokens
+
+Shiphero requires you to add Alloy as a Third-Party Developer to the list of Users in your dashboard. To do this, in your ShipHero account, go to **My Account -> Developer Users -> Add Third-Party Developer**. You will be presented with the form below in which you need to then enter your First Name, Last Name, and your Email (e.g. Alloy, Automation, [\[email protected\]](/cdn-cgi/l/email-protection#9dfef2f3e9fcfee9ddefe8f3fcf1f1f2e4b3fef2f0)). 
+
+![](/images/38f7433-Screenshot_2023-01-26_140858.png)
+
+Once done press the Add Developer button, click Okay on the pop-up, then you should see an Access Token and a Refresh Token. Please copy and paste those into a safe place.
+
+---
+
+### Complete Block Credentials
+
+Now just pop in the tokens from the previous step and you are all set to start the workflow!
+
+![](/images/6c159ba-image.png)
+
+---
+
+### Setup Instructions
+
+1. In Alloy, create a new workflow
+2. Select any app you'd like to trigger the workflow. You could select Yotpo and create a workflow that activates a reward shipment if a customer hits a certain VIP level.
+
+![](/images/372f98c-s4.png "s4.png")
+
+1. Once you've connected Yotpo, you can select and authenticate ShipHero to create the automatic shipment
+
+![](/images/a1d350e-s5.png "s5.png")
+
+1. Configure the fields in ShipHero to be what you'd like. You could grab data from the output of the Yotpo trigger to fill it in dynamically
+
+![](/images/7a6fa31-s6.png "s6.png")
+
+1. Once you activate the workflow you're all set! It will trigger every time the Yotpo event occurs, or whichever event you selected as your trigger

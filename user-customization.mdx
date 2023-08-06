@@ -1,0 +1,51 @@
+---
+title: "User Customization"
+---
+
+Most of the time, you'll want to define the course of integration, as inconsistencies in the way users implement integrations with your platform increase complication without adding value. However, there are cases where a degree of customization makes sense. 
+
+For example, if I wanted to create a Slack integration, which sends a notification to a Slack channel each time an event happens in the ISV's platform, your user will most likely want to choose the channel this message ends up in. This is particularly important in the context of Slack because channels are so highly customizable – while one user might want to route the data to a #customers channel, another user might not even have a #customers channel. Therefore, it's prudent to allow the user to customize this on their own.
+
+Each parameter in the visual workflow builder comes with a checkbox labeled "Configurable by user". When selected, users will be prompted to define customizable this to their liking.
+
+### Merchant Customization Options
+
+Let's take a look at what that Slack example looks like:
+
+![](/images/a49bc5f-slack.png)
+
+If you were to select these the "Configurable by user" option, the user will have to select a Slack channel (which pulls from their linked account). 
+
+You can see what this would look like in the Embedded Modal below.
+
+![](/images/64e7803-modal1.png)
+
+![](/images/4063ea8-modal2.png)
+
+Now that's all well and good, but let's say we wanted to allow the merchant to configure the Slack message itself. If we select the checkbox on the message parameter in the workflow builder, the merchant will be able to configure a message using dynamic variables they'd have exposed earlier in previous blocks.
+
+As you build more workflows, you'll notice that some endpoints allow you to specify custom variables in each workflow. For example, merchants using Klaviyo will often add custom properties to enable richer segmentation. Embedded allows you to toggle merchant customization at each parameter. This means you can give the merchants the ability to specify the exact number and configuration of custom variables for any endpoint which supports it.
+
+### ISV Block Hiding
+
+If there are endpoints that you need to hit for user workflows but don't want merchants to see those blocks, you can hide individual blocks from merchants. By selecting "Internal use", you are opting to send information to the credential stored in the workflow builder. This is one of the only times in workflow building that a credential used in the workflow builder is used for a real execution as opposed to serving as a template.
+
+There are often times when you want to stream data to a destination that does not require input from the user. Let's take an example:
+
+In the [Integration Structure](/docs/integrations#integration-structure) article, we discussed how to stream data from events to destinations. A common destination is often a data warehouse such as Snowflake. In our hypothetical example, we need to stream data from our users' Shopify stores directly to the ISV's Snowflake warehouse.
+
+![](/images/44bc0d7-BRD-27_Data_Warehouse_Destination.png)
+
+In this workflow, the user needs to authenticate their Shopify account but needs to take no action for the Snowflake destination. As such, it wouldn't make much sense to surface the Snowflake block to the user. To handle this, you can select the **Hide this block from users** checkbox. Selecting this option will route the data to the Snowflake warehouse using the credentials you set up in the Authenticate (Step 2) section of the workflow builder. It will also redact any mention of Snowflake to your users.
+
+When your users go to set up this integration, they'll only be prompted to connect their Shopify credentials.
+
+![](/images/1cb6165-Screen_Shot_2022-10-03_at_9.16.13_PM.png)
+
+### Setting Workflow Variables
+
+You may find that your workflows require user-specific values which need to be provided programmatically, not through the Embedded Modal. 
+
+In order to achieve this, you can add a Variable block to the workflow builder and specify as many fields as you need. You can then use those fields later in the workflow where the user-specific values are required.
+
+![](/images/a99e411-Screen_Shot_2022-10-03_at_9.19.34_PM.png)

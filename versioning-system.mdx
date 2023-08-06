@@ -1,0 +1,41 @@
+---
+title: "Versioning System"
+---
+
+In the [previous tutorial](/docs/integrations) we learned how to build an integration from scratch. In doing so, we needed to publish our workflow version. While we were doing this though, you might've been asking yourself "what exactly is happening behind the scenes?"
+
+We introduced the versioning system as a means to handle different iterations of a workflow and to maintain support for users who may have installed a previous version. To illustrate this problem, let's take an example:
+
+ACME Co is a shipping company. They've set up an integration that posts a Slack message to a user's Slack channel each time an order is shipped with ACME's platform. As it currently stands, ACME has set up their Slack integration to post the order number and status. ACME rolls out this integration in June and as of September, 1,000 users have installed it. Later that year, in December, ACME introduces a feature that allows users to check their order status via a tracking URL. Naturally, ACME wants to also send along the tracking URL in its Slack integration. But making a sudden change to the integration could impact the 1,000 current users.
+
+To solve this, we introduced versioning. Versioning allows you to create multiple iterations of a workflow. With our versioning system, ACME Co can create a new version of their workflow to include support for the tracking URL while not breaking things for existing users. When existing users log in again, they can be prompted to upgrade to the latest version.
+
+<Warning>
+
+    **Editing Workflows**
+
+    Note that you cannot edit a previous version. Once a new version is released, old versions enter a read-only state.
+
+</Warning>
+
+### Releasing a new Version
+
+In our previous example, we built a workflow to push data to Shopify every time an event occurs in your platform. We released this version to activate it. When you "release" a version, it immediately becomes the active version. In other words, when a new user clicks on your integration to install it, they will be prompted to install this version.
+
+Existing users will continue to use the previous version until they upgrade to the latest version.
+
+![](/images/318ecff-create_version.png)
+
+To edit a workflow, hit the **Create new version** button. Now, you'll be taken back into the workflow editor experience where you can modify the workflow structure. At any point when you feel ready, you can click the **Release the version** button to publish your changes.
+
+![](/images/9ebd223-Group_30.png)
+
+To view previous versions or to restore to a previous version, click the clock icon next to the release button. Selecting this will open a drawer listing all the workflows you've created.
+
+![](/images/3ed6498-Screen_Shot_2022-09-11_at_12.58.30_AM.png)
+
+![](/images/65d3536-version_history.png)
+
+### Wrapping Up
+
+In this section, we took a look at how to use the versioning system in Alloy Embedded. The versioning system allows SaaS Vendors to create multiple iterations of a workflow while maintaining workflow stability and continuity for existing users even when a change is made.

@@ -1,0 +1,18 @@
+---
+title: "Error Handler"
+description: "A logic block that splits the workflow based on a block's response code"
+---
+
+With the Error Handler, you will be able to take action based on the status you receive in the response you are given whether it is successful or has an error. But wait, it gets even better! You can also specify what action you want to take down to the specific response code whether it is a 200, 307, 401, 502 etc. 
+
+To better understand how this would be beneficial, lets take a look at an example.
+
+## How to Handle Errors in a Response
+
+In this example, our use case is to lookup a customer in Postscript to see if they are an existing subscriber before taking action. In Postscript's “get a subscriber by email”, Postscript returns “404: Resource Not Found” when the subscriber being searched for doesn’t exist. When faced with errors, Alloy will halt the workflow and return an error, but with the error handler, Alloy continues running the workflow and takes action accordingly.
+
+In our use case we are wanting to update a current subscriber whenever a customer is updated in the ISV's platform. Below you will see we have included the error handler after the block that would throw an error and halt the workflow. Here we are defining what actions we would like to take based on the status code received from Postscript after searching for an existing subscriber.
+
+![](/images/20a0134-Screen_Shot_2023-04-21_at_11.50.45_AM_1.png)
+
+As you can see the error handler is quite powerful in opening up many opportunities that were once impossible. You are now ready to make magic happen!

@@ -1,0 +1,9 @@
+---
+title: "Workflow Retries"
+---
+
+When running executions that involve large data transfers and thousands (if not millions) of API calls, you might occasionally experience rate limits. Rate limits are a strategy employed by many 3rd party services to limit the amount of incoming traffic.
+
+By default, Alloy has logic in place to handle rate limits. If your workflow gets rate limited at a specific block, Alloy will automatically attempt to retry the request after an arbitrary few seconds. If the rate limit continues, Alloy will continue to retry up to 20 times.
+
+After the 20 times retry threshold is reached, Alloy Embedded logs the execution as an error. You can easily identify errors using our [GET /workflow/errors](/reference/get-workflow-errors) endpoint and re-run a failed execution with our [POST /workflows/rerun ](/reference/rerun-workfow)endpoint.

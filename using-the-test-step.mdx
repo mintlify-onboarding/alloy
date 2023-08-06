@@ -1,0 +1,19 @@
+---
+title: "Using the Test Step"
+---
+
+Each block, be it an action or trigger, allows users to test the outcomes of running the block. The test, and the sample output data it reveals, can give insight into what information is outputted by the block and accessible as variables in subsequent blocks in the workflow.
+
+**Testing on trigger blocks**  
+A trigger block's Step 3 will pull a recent event from the app in question and return the data that is created upon said event. For example, in this case we're using a Shopify Trigger block for when an order is paid. After clicking Show Sample Output Data, the user is able to see all the different variables they're able to access.
+
+![1280](/images/d428e7c-u1.gif "u1.gif") 
+
+Clicking the Rerun Test button will pull in the most recent event that corresponds to the one specified. This is useful when taking test actions as you're able to see the results change live on the app side.
+
+**Testing on action blocks**  
+When testing on action blocks, users are given more control as they're able to send real actions to the respective apps. In this example, a Slack message is being sent to notify team members of a new order.
+
+![1280](/images/40d4378-u2.gif "u2.gif") 
+
+When _hitting Send Test Data_ on Step 4 of an action block, real data will actually be sent to the app.

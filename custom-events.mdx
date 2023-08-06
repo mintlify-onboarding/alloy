@@ -1,0 +1,33 @@
+---
+title: "Custom Events"
+---
+
+Most of the time, you can use the built-in event blocks to invoke a workflow. 
+
+But if you want to trigger an Embedded workflow when an event happens within your own app you'll need a different solution. Fortunately, we've built out **Custom Events** to handle this.
+
+As discussed in the [Quick Start](/docs/embedded-quick-start#the-second-workflow-your-app-%E2%86%92-bigcommerce), custom events allow you to define when and how an Alloy Embedded workflow is invoked. Let's take an example:
+
+Assume you want to invoke a workflow every time a customer creates a new ticket in your (ISV) platform. Every time this happens, you want to enable a Slack integration to post a message to a channel indicating that the ticket was created. 
+
+You can easily define a custom event to do this. To get started, add the Custom Event to your workflow. Then, create a new event and define the **schema**. The schema tells Alloy Embedded what the data your planning on sending along with this event actually looks like. For example, when a ticket is created in your app, you'll probably want to send along some details about that ticket so you can pass that to your Slack integration – perhaps you'll want to include the `ticketName`, `customerEmail`, and `description` (among other values). Define a schema and some sample values in the Custom Event as seen below.
+
+![](/images/b7c4623-Screen_Shot_2022-10-03_at_9.31.37_PM.png)
+
+Next, add the Slack integration to the canvas. You can use the variables to map the data from the Custom Event as seen below. Every time this workflow runs, it will send a Slack message with the ticket name, customer email and description you specified.
+
+![](/images/cb11145-Screen_Shot_2022-10-03_at_9.35.36_PM.png)
+
+Once you're done, feel free to publish this workflow. You can reuse the Custom Event across multiple workflows as you see fit.
+
+### Invoking the Custom Event
+
+To run the Custom Event, you can make a request to our [**POST /run/event**](/reference/run-event) endpoint and specify the `event` name (in our example that was "Ticket Created"), the `userId` for which you want to invoke the event for, and any JSON data you want to send along as part of the schema in the `data` parameter.
+
+To make things even easier, we have a backend Node.js SDK that allows you to easily invoke events with two simple lines of code. Read more [here](/docs/nodejs-sdk).
+
+JavaScript
+
+`await alloy.identify("gregg");
+await alloy.event("Ticket Created", { "ticketName": "Alloy 123", "customerEmail": "[[email protected]](/cdn-cgi/l/email-protection)", "description": "I'm excited to buy Alloy Embedded" });
+`

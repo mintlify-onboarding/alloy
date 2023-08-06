@@ -1,0 +1,102 @@
+---
+title: "Custom Code"
+---
+
+### How to Use a Custom Code Block
+
+![](/images/10eb252-Group_2_1.png)
+
+**What is the purpose of a Custom Code block?**
+
+A Custom Code block allows you to access variables on the inputData object. This ability allows you to make the previously impossible, possible. With custom code, you can do practically anything with Alloy, including advanced and fine-grained data manipulation. Note that the custom code block only supports vanilla JavaScript. If you have specific questions related to using third party libraries, please email [\[email protected\]](/cdn-cgi/l/email-protection#b7d4d8d9c3d6d4c3f7c5c2d9d6dbdbd8ce99d4d8da).
+
+_Note: To make HTTP requests, we currently only support the Axios library._
+
+**A simple example**
+
+Custom Code blocks are great for adding a more custom approach to your workflows. In this example, we are looking at a manual flow. Manual flows are useful when you want to have complete control over when the workflow is invoked. For instance, if you wanted to do a one-time data sync, a manual flow would be ideal.
+
+Let’s say that you want to look up company data using Clearbit and then send that data to a URL of your choosing. To accomplish this you would want to use a Custom Code block in which you can specify the destination in addition to the Method.
+
+**Now let’s build this workflow!** 
+
+Start by creating a new workflow and select **Utilities -> Manual Workflow**  as your trigger. This specific trigger only runs when you tell it to instead of being based on an event or an action.
+
+For this next block, we will be adding a Clearbit action. We want to select **Enrich**  as the action as this will allow us to look up company data based on a domain. In this example, we are adding Google.com as the domain for the Input.
+
+We are now ready to add our Custom Code block! This is where things get exciting! We can select the variables we want to be logged along with your custom code including your URI(L). Here we are naming the variables, selecting **Single Value** as the **Variable Type** and adding the dynamic variables name, domain, and alexa\_us\_rank as the **Variable Values**. Your workflow should look like the screenshot below. We’ve attached the code example below as well:
+
+JavaScript
+
+`const {name, domain, us_alexa_rank} = inputData;
+
+const options = {
+  url:'https://webhook.site/0f2bd223-4930-417c-8303-a134a880983d',
+  method:'POST',
+  data:{
+    name,
+    domain,
+    us_alexa_rank
+  }
+}
+
+axios.request(options).then(res => {
+  resolve({example:'output'});
+}).catch(err => {
+  reject(err);
+});
+`
+
+![](/images/e4bac5c-Screenshot_2022-06-06_101931.png "Screenshot 2022-06-06 101931.png")
+
+Once you have added your variables and custom code, just hit next and you are all done! You can even check the sample output to see that it reflects example data. Simple enough, right? Now that you know how to properly use a Custom Code block, you are ready to explore all the possibilities that unlock with this feature.
+
+**Is that all?**
+
+Not even close! If you thought that was cool, wait until you see this next part!
+
+Let's say you want to pass an entire payload but it is missing one key variable, this method will allow you to take a further look at exactly how we can accomplish appending additional variables to any payload. Let’s break this down and walk through this together.
+
+Remember how earlier we selected **Single Value** for the **Variable Type**? In this method, we will select **Entire Block Output** instead. We will then choose a previous Trigger or Action block from that same workflow as our **Variable Value**. This will be the payload you are wanting to append. 
+
+In the example below, we have chosen a Shopify Trigger as our Variable Value as well as adding this following line of code to the Code editor: 
+
+JavaScript
+
+`resolve( Object.assign( inputData.previousBlock, { something: 'else' }))
+`
+
+![](/images/5e74574-Screenshot_2022-06-06_102045.png "Screenshot 2022-06-06 102045.png")
+
+In our example, _{ something: 'else' }_ is just a placeholder for whatever you are wanting to add to the output. Be sure to replace that with the variable you are wanting to append to the payload.
+
+Note: Trigger blocks are pretty straightforward when using that output data as the Variable Value. However, when using an action block payload, be mindful of the wrapper within the output. See examples below for further clarification.
+
+Trigger Block Output Example:
+
+JSON
+
+`{
+  "id": 6036072071324,
+  "email": "[[email protected]](/cdn-cgi/l/email-protection)",
+  "first_name": "Brandon",
+  "last_name": "Looker",
+. . .
+}
+`
+
+Action Block Output Example:
+
+JSON
+
+`{
+  "customers": {
+    "id": 6036072071324,
+    "email": "[[email protected]](/cdn-cgi/l/email-protection)",
+    "first_name": "Brandon",
+    "last_name": "Looker",
+. . .
+}
+`
+
+That wraps up our walkthrough on Custom Code blocks. If you were able to follow along and had a successful outcome, you are now a Custom Code expert. Congratulations! We can’t wait to see how you put this into everyday use!

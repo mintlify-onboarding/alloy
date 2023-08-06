@@ -1,0 +1,35 @@
+---
+title: "Field Types"
+---
+
+Alloy supports several different input field types. Understanding what types of data and variables can be entered into input fields will greatly improve your workflow building experience. 
+
+**Single line fields**  
+In many cases, we limit the variables that are available for selection in Step 3 of an action block. This is because many API endpoints are only looking for single strings of data, like an Order ID for example. For fields that are looking for an email input, the Variable Selector only shows email variables. Of course, you may also enter static text in any of these single line fields.
+
+![359](/images/37f593b-fb1.png "fb1.png") 
+
+**Multi-line fields**  
+The next most common field type is the multi-line content composer, usually for longer messages, emails, and notes. The content composer gives you the freedom to include any type of variable from the Variable Selector. 
+
+![1243](/images/c0ed77b-fb2.png "fb2.png") 
+
+**Tag fields**  
+Tag fields allow users to add as many separate text or variable tags as they'd like. In this example, the user is tagging the customer with both a static "VIP" tag and a variable, "Source Name". 
+
+![740](/images/44102b5-fb3.png "fb3.png") 
+
+**HTML field**  
+Certain blocks, like Send Email, gives users the ability to compose HTML via a combination of regular text and variables.
+
+![901](/images/7440961-fb4.png "fb4.png") 
+
+**Date field**  
+The first thing to note regarding date fields is that apps interpret dates and their formats differently. In the case that two apps have incompatible date fields, you can use the Date Formatter block found under _Utilities_ to manage and access dates across different apps. When selecting a date on Alloy, we present a calendar view and pre-format when passing date variables over to apps where we know their desired input.
+
+![600](/images/879df1c-fb5.png "fb5.png") 
+
+**Boolean field**  
+Binary variables are used throughout Alloy to customize data outputs (usually lists) to a user's needs. In this example, the Boolean field prevents Alloy from pulling in thousands of rows in an Airtable as users are often only interested in those that are recently edited.
+
+![632](/images/51f1186-fb6.png "fb6.png")
