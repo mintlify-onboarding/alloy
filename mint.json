@@ -20,15 +20,17 @@
       "url": "https://app.runalloy.com/login"
     }
   ],
-  "anchors": [
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    },
     {
       "name": "Blog",
-      "icon": "magnifying-glass",
       "url": "https://runalloy.com/blog/"
     },
     {
       "name": "Guides",
-      "icon": "newspaper",
       "url": "https://runalloy.com/guides/"
     }
   ],
