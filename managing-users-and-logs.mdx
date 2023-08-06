@@ -6,10 +6,29 @@ title: "Managing Users"
 
 We provide the [Users API](https://alloyautomation.readme.io/reference/create-a-user) to allow you to create, manage, update, and disable individual user accounts. You will need to create a user in Embedded for each individual that intends on using the integrations Embedded powers. You can think of the User object like a container. The guide covers:
 
-- Creating Users
-- Deleting Users
-- Managing User Tokens
-- Accessing Workflow Logs
+<CardGroup cols={2}>
+<Card
+  title="Creating Users"
+  icon="plus"
+  icontype="duotone"
+></Card>
+<Card
+  title="Deleting Users"
+  icon="delete-left"
+  icontype="duotone"
+></Card>
+
+<Card
+  title="Managing User Tokens"
+  icon="list-check"
+  icontype="duotone"
+></Card>
+<Card
+  title="Accessing Workflow Logs"
+  icon="clipboard"
+  icontype="duotone"
+></Card>
+</CardGroup>
 
 ### Creating Users
 
@@ -26,7 +45,7 @@ Once the user is created, in order to render the Embedded modal, you'll want to 
 
     Remember that you must invoke the User Token endpoint every time you want to render the Embedded modal. For security, the JWT generated only lasts a maximum of 30 minutes.
 
-<Note>
+</Note>
 
 ### Listing and Finding Users
 

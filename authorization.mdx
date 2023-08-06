@@ -6,8 +6,8 @@ title: "Backend Authorization"
 
 To make requests against the Alloy Embedded APIs, you’ll need to login to your Alloy Embedded account and located the **API Keys** tab under **Settings**. From here, you'll notice there are two types of API Keys to generate:
 
-- Development Key
-- Production Key
+<Card title="Development Key" icon="code" icontype="duotone"></Card>
+<Card title="Production Key" icon="browser" icontype="duotone"></Card>
 
 ![](/images/585ea94-Screen_Shot_2022-09-03_at_9.07.06_PM.png)
 
@@ -19,13 +19,15 @@ Note these keys are intended to be used on the backend only and should never be 
 
 To use our API key in your requests, include the key in the `Authentication` header as a bearer token. Other parameters can be added as specified in the API reference.
 
+<CodeGroup>
+
 ```bash cURL
 curl <alloy-endpoint>
    -H "Accept: application/json"
    -H "Authorization: Bearer <API KEY>"
 ```
 
-```node.js Node.js
+```java Node.js
 const request = require("request");
 
 request(
@@ -44,6 +46,8 @@ request(
   }
 );
 ```
+
+</CodeGroup>
 
 ### Key Security
 
