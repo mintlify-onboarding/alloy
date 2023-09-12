@@ -42,18 +42,13 @@
     {
       "group": "Embedded IPAAs",
       "pages": [
-        {
-          "group": "Getting Started",
-          "pages": [
-            "terminology",
-            "embedded-quick-start",
-            "frontend-javascript-sdk",
-            "authorization",
-            "managing-users-and-logs",
-            "integrations",
-            "versioning-system"
-          ]
-        }
+        "terminology",
+        "embedded-quick-start",
+        "frontend-javascript-sdk",
+        "authorization",
+        "managing-users-and-logs",
+        "integrations",
+        "versioning-system"
       ]
     }
   ],
