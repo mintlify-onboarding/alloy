@@ -50,6 +50,12 @@
         "integrations",
         "versioning-system"
       ]
+    },
+    {
+      "group": "Users",
+      "pages": [
+        "api-reference/list-users"
+      ]
     }
   ],
   "footerSocials": {

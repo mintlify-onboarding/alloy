@@ -1,0 +1,118 @@
+{
+        "openapi": "3.1.0",
+        "info": {
+            "title": "Users",
+            "version": "3.0"
+        },
+        "servers": [
+            {
+                "url": "https://embedded.runalloy.com/2023-12"
+            }
+        ],
+        "components": {
+            "securitySchemes": {
+                "sec0": {
+                    "type": "apiKey",
+                    "in": "header",
+                    "name": "Authorization",
+                    "x-bearer-format": "bearer",
+                    "x-default": ""
+                }
+            }
+        },
+        "security": [
+            {
+                "sec0": []
+            }
+        ],
+        "paths": {
+            "/users": {
+                "get": {
+                    "summary": "List Users",
+                    "description": "Returns a list of all users created in your Embedded account.",
+                    "operationId": "list-all-users",
+                    "parameters": [
+                        {
+                            "name": "parentWorkflowId",
+                            "in": "query",
+                            "description": "You can pass a parentWorkflowId if you wish to list users for a specific workflow.",
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "Authorization",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string",
+                                "default": "bearer YOUR_API_KEY"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "200",
+                            "content": {
+                                "application/json": {
+                                    "examples": {
+                                        "Result": {
+                                            "value": "{\n    \"data\": [\n        {\n            \"userId\": \"6323d7c9122ae69742a5d0a2\",\n            \"username\": \"gregg\",\n            \"fullName\": \"Gregg Mojica\"\n        },\n        {\n            \"userId\": \"6323d7cf9ae88f59bf66ce63\",\n            \"username\": \"sara\",\n            \"fullName\": \"Sara Du\"\n        },\n        {\n            \"userId\": \"6323d7e159479ba26d80fcc8\",\n            \"fullName\": \"William Jackson\"\n        },\n        {\n            \"userId\": \"6323d7f090020baf1091b151\",\n            \"username\": \"izzy@gmail.com\",\n            \"fullName\": \"Izzy Jackson\"\n        },\n         {\n            \"userId\": \"6323d7da4b764bfe02cacaef\",\n            \"username\": \"jose@example.com\",\n            \"fullName\": \"Jose Santos\"\n        }\n    ]\n}"
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "data": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "userId": {
+                                                            "type": "string",
+                                                            "example": "6323d7c9122ae69742a5d0a2"
+                                                        },
+                                                        "username": {
+                                                            "type": "string",
+                                                            "example": "gregg"
+                                                        },
+                                                        "fullName": {
+                                                            "type": "string",
+                                                            "example": "Gregg Mojica"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "401": {
+                            "description": "401",
+                            "content": {
+                                "application/json": {
+                                    "examples": {
+                                        "Result": {
+                                            "value": "{\n  \"message\":\"Unauthorized\"\n}"
+                                        }
+                                    },
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "message": {
+                                                "type": "string",
+                                                "example": "Unauthorized"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "deprecated": false,
+                    "security": []
+                }
+            }
+        }
+}
