@@ -8,7 +8,7 @@
   "colors": {
     "primary": "#808080",
     "light": "#929292",
-    "dark": "#808080"
+    "dark": "#2b2e32"
   },
   "topbarCtaButton": {
     "name": "Book a Demo",
@@ -37,7 +37,9 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["introduction"]
+      "pages": [
+        "introduction"
+      ]
     },
     {
       "group": "Embedded IPAAs",
